@@ -26,10 +26,12 @@ const Inicio = () => {
                 alt="..."
               />
               <div className="carousel-caption d-none d-md-block page m=0">
-                <h1 className="display-6 fw-bold">¡Vení estrenala!</h1>
+                <div className="bg-dark bg-opacity-50 p-3 rounded w-50 mx-auto">
+                <h1 className="display-7 fw-bold">¡Vení estrenala!</h1>
                 <p className="lead fw-normal">
                   Ya esta habilitada la cancha con alfombra de agua
                 </p>
+                </div>
               </div>
             </div>
           </div>
@@ -42,10 +44,12 @@ const Inicio = () => {
                 alt="..."
               />
               <div className="carousel-caption d-none d-md-block">
-                <h1 className="display-6 fw-bold">¡Las Mejores Instalaciones!</h1>
+                <div className="bg-dark bg-opacity-50 p-3 rounded w-50 mx-auto">
+                <h1 className="display-7 fw-bold">¡Las Mejores Instalaciones!</h1>
                 <p className="lead fw-normal">
                   Calidad garantizada: iluminación profesional y césped de primera.
                 </p>
+                </div>
               </div>
             </div>
           </div>
@@ -58,10 +62,12 @@ const Inicio = () => {
                 alt="..."
               />
               <div className="carousel-caption d-none d-md-block">
-                <h1 className="display-6 fw-bold">¡Tu Cancha te Espera!</h1>
+                <div className="bg-dark bg-opacity-50 p-3 rounded w-50 mx-auto">
+                <h1 className="display-7 fw-bold">¡Tu Cancha te Espera!</h1>
                 <p className="lead fw-normal">
                   Reservá tu cancha de fútbol 5 al instante.
                 </p>
+                </div>
               </div>
             </div>
           </div>
