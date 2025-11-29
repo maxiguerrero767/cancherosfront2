@@ -2,7 +2,7 @@
 .carousel-ratio {
   position: relative;
   width: 100%;
-  aspect-ratio: 20/6; /* tamaño de las imagenes */
+  aspect-ratio: 18/6; /* tamaño de las imagenes */
   overflow: hidden;
 }
 
@@ -10,4 +10,12 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.boton-alquilar {
+  top: 410px;
+  right: 20px;
+  z-index: 20;
+  padding: 10px 20px;
+  font-size: 1.1rem;
 }
