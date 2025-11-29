@@ -1,0 +1,137 @@
+/* Estilo para el texto superpuesto en el carrusel */
+.carousel-caption {
+  /* Centrado absoluto */
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  /* ELIMINAMOS PADDING-BOTTOM: 0 */
+
+  /* Fondo y diseño para visibilidad */
+  color: white;
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.75
+  ); /* Hacemos el fondo un poco más oscuro */
+  border-radius: 8px;
+  width: 90%;
+  max-width: 550px;
+  padding: 0px 20px; /* <--- PADDING MUY PEQUEÑO PARA QUE SE AJUSTE A LA ALTURA */
+  text-align: center;
+}
+
+/* AJUSTE DE TAMAÑO Y MARGEN DE FUENTE PARA EL CONTENIDO DEL CARTEL */
+.carousel-caption h1 {
+  font-size: 1.6rem;
+  margin-bottom: 5px; /* <--- Espacio muy pequeño debajo del título */
+  line-height: 1.2;
+}
+
+.carousel-caption p {
+  font-size: 1rem;
+  line-height: 1.3;
+}
+
+/* Altura del carrusel (Contenedor de la imagen): Mantenemos la altura que estableciste. */
+.carousel-inner,
+.carousel-item {
+  min-height: 15vh;
+}
+.carousel-inner .carousel-item img {
+  height: 70vh;
+  width: 70vh;
+  object-fit: cover;
+}
+
+/* Estilo para asegurar que el botón de Login tenga texto blanco */
+.navbar .btn-success {
+  color: white !important;
+}
+
+/* Estilo para la tarjeta de Indumentaria para Ellas con imagen de fondo */
+.card-mujer-fondo {
+  background-image: url("img/mujer.avif");
+  background-size: cover;
+  background-position: center 20%; /* <--- CAMBIO CLAVE: Tira la imagen hacia abajo */
+  color: white;
+  position: relative;
+}
+
+/* Opcional: Overlay oscuro para mejorar la legibilidad del texto (mantenido) */
+.card-mujer-fondo::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: inherit;
+}
+
+/* Asegura que el contenido de la tarjeta esté sobre el overlay (mantenido) */
+.card-mujer-fondo .card-body {
+  position: relative;
+  z-index: 1;
+}
+
+/* Estilo para la tarjeta de Indumentaria para Hombre */
+/* Estilo para la tarjeta de Indumentaria para Hombre */
+.card-hombre-fondo {
+    /* <--- AÑADIDA INSTRUCCIÓN BACKGROUND-IMAGE ---> */
+    background-image: url("img/hombre.jpg"); 
+    background-size: cover;
+    background-position: center 20%; 
+    /* Asegura que el texto y los elementos sean blancos */
+    color: white;
+    position: relative;
+}
+/* Asegura que el contenido esté sobre el overlay */
+.card-hombre-fondo .card-body {
+    position: relative;
+    z-index: 1;
+}
+/* Overlay oscuro para mejorar la legibilidad del texto en ambas tarjetas */
+.card-mujer-fondo::before,
+.card-hombre-fondo::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Capa semitransparente negra */
+    border-radius: inherit;
+}
+
+/* Estilo para la tarjeta de Indumentaria para Niños */
+.card-ninos-fondo {
+    background-image: url("img/niños.jpg"); /* <-- ASUME ninos.avif en tu carpeta img/ */
+    background-size: cover;
+    background-position: center 50%; /* Posición por defecto, puedes ajustar el % */
+    color: white; 
+    position: relative; 
+}
+
+/* Asegura que el contenido esté sobre el overlay */
+.card-ninos-fondo .card-body {
+    position: relative;
+    z-index: 1;
+}
+
+/* Actualizar la regla del overlay para incluir la tarjeta de niños */
+.card-mujer-fondo::before,
+.card-hombre-fondo::before,
+.card-ninos-fondo::before { /* <--- AÑADIDA ESTA CLASE */
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); 
+    border-radius: inherit;
+}
