@@ -10,6 +10,7 @@ function App() {
   return (
     <BrowserRouter>
       {<Menu></Menu>}
+      
       <main>
         <Routes>
           <Route path="/" element={<Inicio />} />

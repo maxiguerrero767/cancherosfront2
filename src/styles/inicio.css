@@ -12,10 +12,44 @@
   object-fit: cover;
 }
 
+/* Posición general (desktop) */
 .boton-alquilar {
-  top: 410px;
-  right: 20px;
+  top: 80%;
+  right: 5%;
+  transform: translateY(-50%);
   z-index: 20;
   padding: 10px 20px;
   font-size: 1.1rem;
+}
+
+/* ——————————————— */
+/*   MOBILE                   */
+/* ——————————————— */
+@media (max-width: 768px) {
+  .boton-alquilar {
+    top: auto;
+    bottom: 20px;
+    right: 50%;
+    transform: translateX(50%);
+  }
+}
+
+/* card de imagenes */
+.card-img-altura {
+  height: 220px; 
+  object-fit: cover;
+}
+
+/* Mobile: carrusel más alto */
+@media (max-width: 768px) {
+  .carousel-ratio {
+    aspect-ratio: 1/1; /* cuadrado */
+  }
+}
+
+
+@media (max-width: 768px) {
+  .carousel-ratio {
+    aspect-ratio: 4/5;
+  }
 }

@@ -4,20 +4,19 @@ import "bootstrap/dist/css/bootstrap.min.css";
 const Inicio = () => {
   return (
     <>
+      {/* carousel */}
       <div
         id="carouselCanchas"
         className="carousel slide position-relative"
         data-bs-ride="carousel"
         data-bs-interval="3000"
       >
-
         {/* BOTÓN FIJO, INDEPENDIENTE DE LAS FOTOS */}
         <button className="btn btn-warning position-absolute boton-alquilar">
           Alquilá ya
         </button>
 
         <div className="carousel-inner">
-          
           <div className="carousel-item active">
             <div className="carousel-ratio">
               <img
@@ -27,10 +26,10 @@ const Inicio = () => {
               />
               <div className="carousel-caption d-none d-md-block page m=0">
                 <div className="bg-dark bg-opacity-50 p-3 rounded w-50 mx-auto">
-                <h1 className="display-7 fw-bold">¡Vení estrenala!</h1>
-                <p className="lead fw-normal">
-                  Ya esta habilitada la cancha con alfombra de agua
-                </p>
+                  <h1 className="display-7 fw-bold">¡Vení estrenala!</h1>
+                  <p className="lead fw-normal">
+                    Ya esta habilitada la cancha con alfombra de agua
+                  </p>
                 </div>
               </div>
             </div>
@@ -45,10 +44,13 @@ const Inicio = () => {
               />
               <div className="carousel-caption d-none d-md-block">
                 <div className="bg-dark bg-opacity-50 p-3 rounded w-50 mx-auto">
-                <h1 className="display-7 fw-bold">¡Las Mejores Instalaciones!</h1>
-                <p className="lead fw-normal">
-                  Calidad garantizada: iluminación profesional y césped de primera.
-                </p>
+                  <h1 className="display-7 fw-bold">
+                    ¡Las Mejores Instalaciones!
+                  </h1>
+                  <p className="lead fw-normal">
+                    Calidad garantizada: iluminación profesional y césped de
+                    primera.
+                  </p>
                 </div>
               </div>
             </div>
@@ -63,15 +65,14 @@ const Inicio = () => {
               />
               <div className="carousel-caption d-none d-md-block">
                 <div className="bg-dark bg-opacity-50 p-3 rounded w-50 mx-auto">
-                <h1 className="display-7 fw-bold">¡Tu Cancha te Espera!</h1>
-                <p className="lead fw-normal">
-                  Reservá tu cancha de fútbol 5 al instante.
-                </p>
+                  <h1 className="display-7 fw-bold">¡Tu Cancha te Espera!</h1>
+                  <p className="lead fw-normal">
+                    Reservá tu cancha de fútbol 5 al instante.
+                  </p>
                 </div>
               </div>
             </div>
           </div>
-
         </div>
 
         <button
@@ -93,7 +94,71 @@ const Inicio = () => {
           <span className="carousel-control-next-icon"></span>
           <span className="visually-hidden">Next</span>
         </button>
+      </div>
+      {/* venta productos */}
 
+      <div className="container my-5">
+        <h2 className="text-center mb-4">La Indumentaria que Necesitas</h2>
+
+        <div className="row row-cols-1 row-cols-md-3 g-4">
+          
+          {/* CARD 1 */}
+          <div className="col">
+            <div className="card text-white border-0 position-relative">
+              <img
+                src="./img/mujer.avif"
+                className="card-img card-img-altura"
+                alt="mujer con ropa de deporte"
+              />
+
+              <div className="card-img-overlay d-flex flex-column justify-content-end bg-dark bg-opacity-25 text-center">
+                <h5 className="fw-bold">Indumentaria para ellas</h5>
+                <p>Todos los modelos que buscas de las mejores marcas.</p>
+                <a href="#" className="btn btn-outline-light w-50 mx-auto">
+                  Ver Catálogo
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* CARD 2 */}
+          <div className="col">
+            <div className="card text-white border-0 position-relative">
+              <img
+                src="/img/hombre.jpg"
+                className="card-img card-img-altura"
+                alt="hombre saltando"
+              />
+
+              <div className="card-img-overlay d-flex flex-column justify-content-end bg-dark bg-opacity-25 text-center">
+                <h5 className="fw-bold">Indumentaria para el hombre</h5>
+                <p>Camisetas de los mejores clubes y selecciones.</p>
+                <a href="#" className="btn btn-outline-light w-50 mx-auto">
+                  Ver Catálogo
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* CARD 3 */}
+          <div className="col">
+            <div className="card text-white border-0 position-relative">
+              <img
+                src="/img/niños.jpg"
+                className="card-img card-img-altura"
+                alt="niños sonriendo"
+              />
+
+              <div className="card-img-overlay d-flex flex-column justify-content-end bg-dark bg-opacity-25 text-center">
+                <h5 className="fw-bold">Todo para los niños</h5>
+                <p>Las mejores pilchas para los futuros campeones.</p>
+                <a href="#" className="btn btn-outline-light w-50 mx-auto">
+                  Ver Catálogo
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );
