@@ -4,6 +4,7 @@ import Footer from "./components/shared/Footer";
 import Error404 from "./components/pages/Error404";
 import Inicio from "./components/pages/Inicio";
 import './styles/inicio.css'; 
+import Nosotros from "./components/pages/Nosotros"
 
 function App() {
   return (
