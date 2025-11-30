@@ -1,10 +1,10 @@
-
+import Nosotros from "./components/pages/Nosotros"
 
 function App() {
   
   return (
     <>
-  <h1>título Cancheros</h1>
+  <Nosotros></Nosotros>
     </>
   )
 }
