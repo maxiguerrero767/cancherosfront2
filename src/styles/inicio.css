@@ -95,6 +95,50 @@
   line-height: 1.2;
 }
 
+/* carrusel publicidad */
+.slider-publicidad {
+  overflow: hidden;
+  width: 100%;
+  height: 120px; /* altura más baja */
+  position: relative;
+}
+
+.slider-publicidad .slider-track {
+  display: flex; /* usar flex en lugar de inline-block */
+  flex-wrap: nowrap;
+  animation: scrollLeft 20s linear infinite;
+}
+
+.slider-publicidad .slide {
+  flex: 0 0 auto; /* evita que se reduzca tamaño */
+  width: 200px;
+  height: 120px; /* misma altura que contenedor */
+  margin-right: 0px;
+}
+
+.slider-publicidad .slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Posicionamiento individual de imágenes */
+.slider-publicidad .publi1 { object-position: center 20%; }
+.slider-publicidad .publi2 { object-position: center 50%; }
+.slider-publicidad .publi3 { object-position: center 70%; }
+.slider-publicidad .publi4 { object-position: center 30%; }
+.slider-publicidad .publi5 { object-position: center 80%; }
+
+/* Animación continua */
+@keyframes scrollLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); } /* mantiene loop suave */
+}
+
+
+
+/* ================= BOTONES ================= */
+
 /* Botón */
 /* BOTÓN CARD - MISMO ESTILO QUE "Alquilá ya" */
 /* BOTÓN CARD - estilo "Alquilá ya" */

@@ -94,6 +94,31 @@ const Inicio = () => {
           <span className="visually-hidden">Next</span>
         </button>
       </div>
+
+
+
+{/* Carrusel de publicidad */}
+<div className="slider-publicidad my-4">
+  <div className="slider-track">
+    <div className="slide"><img src="../img/mujer.avif" className="publi1" alt="Publicidad 1" /></div>
+    <div className="slide"><img src="../img/publicidades/nike.png" className="publi2" alt="Publicidad 2" /></div>
+    <div className="slide"><img src="../img/publicidades/nike.png" className="publi3" alt="Publicidad 3" /></div>
+    <div className="slide"><img src="../img/publicidades/nike.png" className="publi4" alt="Publicidad 4" /></div>
+    <div className="slide"><img src="../img/publicidades/nike.png" className="publi5" alt="Publicidad 5" /></div>
+
+    {/* Repetimos para loop continuo */}
+    <div className="slide"><img src="../img/mujer.avif" className="publi1" alt="Publicidad 1" /></div>
+    <div className="slide"><img src="../img/publicidades/nike.png" className="publi2" alt="Publicidad 2" /></div>
+    <div className="slide"><img src="../img/publicidades/nike.png" className="publi3" alt="Publicidad 3" /></div>
+    <div className="slide"><img src="../img/publicidades/nike.png" className="publi4" alt="Publicidad 4" /></div>
+    <div className="slide"><img src="../img/publicidades/nike.png" className="publi5" alt="Publicidad 5" /></div>
+  </div>
+</div>
+
+
+
+
+
       {/* venta productos */}
 
       <div className="container my-5">
