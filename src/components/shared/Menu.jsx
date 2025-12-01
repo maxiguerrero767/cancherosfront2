@@ -1,9 +1,9 @@
-import React from 'react';
+import NavBar from '../pages/NavBar';
 
 const Menu = () => {
     return (
         <div>
-          AQUI NAVBAR  
+         <NavBar/>
         </div>
     );
 };

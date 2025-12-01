@@ -1,4 +1,3 @@
-import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const Inicio = () => {
@@ -22,8 +21,9 @@ const Inicio = () => {
             <div className="carousel-ratio">
               <img
                 src="img/banderin.jpg"
-                className="w-100 h-100 object-fit-cover"
-                alt="..."
+                className="w-100 h-100  object-fit-cover"
+                alt="Canchas de fútbol 5"
+                
               />
               <div className="carousel-caption d-none d-md-block page m=0">
                 <div className="bg-dark bg-opacity-50 p-3 rounded w-50 mx-auto">
@@ -36,7 +36,7 @@ const Inicio = () => {
             </div>
           </div>
 
-          <div className="carousel-item">
+          <div className="carousel-item ">
             <div className="carousel-ratio">
               <img
                 src="img/luces estadio.webp"
@@ -95,6 +95,7 @@ const Inicio = () => {
         </button>
 
       </div>
+      
     </>
   );
 };
