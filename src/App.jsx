@@ -4,12 +4,13 @@ import Footer from "./components/shared/Footer";
 import Error404 from "./components/pages/Error404";
 import Inicio from "./components/pages/Inicio";
 import './styles/inicio.css'; 
+import Contacto from "./components/pages/Contacto";
 
 
 function App() {
   return (
     <BrowserRouter>
-      {<Menu></Menu>}
+      {<Contacto></Contacto>}
       <main>
         <Routes>
           <Route path="/" element={<Inicio />} />
