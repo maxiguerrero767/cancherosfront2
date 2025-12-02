@@ -3,14 +3,16 @@ import Menu from "./components/shared/Menu";
 import Footer from "./components/shared/Footer";
 import Error404 from "./components/pages/Error404";
 import Inicio from "./components/pages/Inicio";
-import './styles/inicio.css'; 
-import Nosotros from "./components/pages/Nosotros"
+import "./styles/inicio.css";
+import Login from "./components/pages/Login";
+import Nosotros from "./components/pages/Nosotros";
 
 function App() {
   return (
     <BrowserRouter>
-      {<Menu></Menu>}
-      
+      <Menu></Menu>
+         
+
       <main>
         <Routes>
           <Route path="/" element={<Inicio />} />

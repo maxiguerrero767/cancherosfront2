@@ -1,27 +1,45 @@
-const login = () => {
+import { Modal, Button, Form } from "react-bootstrap";
+import { useForm } from "react-hook-form";
+
+const Login = ({ show, handleClose }) => {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+    console.log("Datos del login:", data);
+    reset();
+    handleClose();
+  };
+
   return (
-    <Modal
-      show={showModal}
-      onHide={closeModal}
-      className="modal-custom-content"
-    >
-      <Modal.Header
-        closeButton
-        className="mmd modal-header modal-custom-header"
-      >
-        <Modal.Title>Iniciar Sesión</Modal.Title>
+    <Modal show={show} onHide={handleClose} centered contentClassName="border border-white border-3">
+      <Modal.Header closeButton className="">
+        <Modal.Title>Iniciar sesión</Modal.Title>
       </Modal.Header>
 
-      <Modal.Body className="nav-pri modal-custom-body">
+      <Modal.Body>
         <Form onSubmit={handleSubmit(onSubmit)}>
           <Form.Group className="mb-3">
-            <Form.Label>Correo</Form.Label>
+            <Form.Label>Email</Form.Label>
             <Form.Control
               type="email"
-              {...register("email", { required: "El email es obligatorio" })}
+              placeholder="juan@email.com"
+              {...register("email", {
+                required: "El email es obligatorio",
+                pattern: {
+                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                  message: "El formato del email no es válido",
+                },
+              })}
             />
             {errors.email && (
-              <span className="text-danger">{errors.email.message}</span>
+              <Form.Text className="text-danger">
+                {errors.email.message}
+              </Form.Text>
             )}
           </Form.Group>
 
@@ -29,44 +47,35 @@ const login = () => {
             <Form.Label>Contraseña</Form.Label>
             <Form.Control
               type="password"
+              placeholder="********"
               {...register("password", {
                 required: "La contraseña es obligatoria",
+                pattern: {
+                  value:
+                    /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-={}[\]|:;"'<>,.?/]).{8,}$/,
+                  message:
+                    "Mínimo 8 caracteres, una mayúscula, un número y un símbolo especial",
+                },
               })}
             />
             {errors.password && (
-              <span className="text-danger">{errors.password.message}</span>
+              <Form.Text className="text-danger">
+                {errors.password.message}
+              </Form.Text>
             )}
           </Form.Group>
 
-          <div className="text-center mt-3">
-            <Link className="text-success fw-semibold text-muted">
-              ¿Olvidaste tu contraseña?
-            </Link>
-          </div>
-
-          <div className="text-center mt-3">
-            <small>
-              ¿Aún no tienes cuenta?
-              <Link to={"/registro"} onClick={closeModal}>
-                Regístrate
-              </Link>
-            </small>
-            <div className="my-2">
-              <Button variant="success" type="submit">
-                Iniciar Sesión
-              </Button>
-            </div>
-          </div>
+          <Button
+            variant="primary"
+            type="submit"
+            className="w-50 mx-auto d-block"
+          >
+            Iniciar sesión
+          </Button>
         </Form>
       </Modal.Body>
-
-      <Modal.Footer className="mmd modal-custom-footer">
-        <Button variant="secondary" onClick={closeModal}>
-          Cerrar
-        </Button>
-      </Modal.Footer>
     </Modal>
   );
 };
 
-export default login;
+export default Login;
