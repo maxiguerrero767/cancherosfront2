@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 import "../../styles/Footer.css"; // Asegúrate de crear este archivo css
 import coachTeamLeader from "../../../public/coachMotivation.bmp";
+import PublicidadFooter from "./PublicidadFooter";
+import { Container } from "react-bootstrap";
 
 const Footer = () => {
   return (
-    <footer className="footer-container">
-      {/* SECCIÓN 1: PROFESORES (Fondo Negro con Imagen) */}
-      <div className="teacher-section">
+    <Container className="footer-container">      
+      <Row className="teacher-section">
         <div className="container">
           <div className="row align-items-center">
             <div className="col-md-5 text-center">
@@ -17,6 +18,7 @@ const Footer = () => {
                 className="teacher-img"
               />
             </div>
+         
             <div className="col-md-7 text-white teacher-text-col">
               <h3 className="text-warning fw-bold">¿Sos profesor?</h3>
               <h4 className="fw-bold">
@@ -32,12 +34,14 @@ const Footer = () => {
             </div>
           </div>
         </div>
-      </div>
-
-      {/* SECCIÓN 2: DESCARGA LA APP (Fondo Azul) */}
+      <Row/>
+      <Row>
       <div className="app-section text-center text-white py-5">
-        <div className="container">
-          <h3 className="fw-bold">
+        <div className="g-col-6 g-col-md-4">
+        <PublicidadFooter/>
+        </div>
+        <div className="g-col-6 g-col-md-4">
+           <h3 className="fw-bold">
             Registrate, reservá y<br />
             armá tu partido!
           </h3>
@@ -45,7 +49,6 @@ const Footer = () => {
             Para complejos deportivos, disponible en Android, iOS y nuestra
             plataforma web
           </p>
-
           <div className="d-flex justify-content-center gap-3 mt-4">
             {/* Botones de Stores (Imágenes SVG o PNG) */}
             <a href="#" className="store-btn">
@@ -61,9 +64,15 @@ const Footer = () => {
               />
             </a>
           </div>
+          <div className="g-col-6 g-col-md-4">
+            <PublicidadFooter/>
+          </div>
+        <Row/>
+        
         </div>
+       
       </div>
-
+      
       {/* SECCIÓN 3: LINKS Y CONTACTO (Fondo Negro Inferior) */}
       <div className="links-section bg-black text-white py-4">
         <div className="container">
@@ -145,7 +154,7 @@ const Footer = () => {
         </svg>
         Contactanos
       </a>
-    </footer>
+    <Container/>
   );
 };
 
