@@ -2,7 +2,8 @@ import { Container, Card, Row, Col, Button } from "react-bootstrap";
 import PaulaCabana from "../../img/PaulaCabana.jpg";
 import MaximilianoGuerrero from "../../img/MaximilianoGuerrero.jpg";
 import IgnacioLedesma from "../../img/IgnacioLedesma.jpg";
-import devPabloGermanJimenez from "../../img/devPabloGermanJimenez♪.bmp";
+/* import { Link } from "react-router-dom"; */
+/* import "../../styles/nosotros.css"; */
 
 const Nosotros = () => {
   return (
@@ -119,23 +120,23 @@ const Nosotros = () => {
             <Card className="cardNosotros h-100">
               <Card.Img
                 variant="top"
-                className="imgCardNosotros mt-3 "
-                 src={devPabloGermanJimenez} 
-                alt=" 🔥Pablo Germán Jiménez 🔥"
+                className="imgCardNosotros mt-3"
+/*                 src={GermanGimenez} */
+                alt="Germán Gimenez"
               />
-              <Card.Body >
-                <Card.Title className="nameCardNosotros mx-4 my-2">
-                  🔥Pablo Germán Jiménez ♪
+              <Card.Body>
+                <Card.Title className="nameCardNosotros">
+                  Germán Giménez
                 </Card.Title>
                 <Row>
                   <Col xs={6} className="text-center">
-                    <a href="" target="_blank" rel="noopener noreferrer">
+                    <a href="*" target="_blank" rel="noopener noreferrer">
                       <i className="bi bi-github iconoCard"></i>
                     </a>
                   </Col>
-                  <Col xs={12} className="text-center">
-                    <a href="https://github.com/Pablo-German-Jimenez" target="_blank" rel="noopener noreferrer">
-                      <i className="bi bi-linkedin iconoCard">Repositorio Github♥</i>
+                  <Col xs={6} className="text-center">
+                    <a href="*" target="_blank" rel="noopener noreferrer">
+                      <i className="bi bi-linkedin iconoCard"></i>
                     </a>
                   </Col>
                 </Row>

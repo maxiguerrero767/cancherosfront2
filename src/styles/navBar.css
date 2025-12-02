@@ -47,7 +47,7 @@
 .logo-video-container::before {
     content:'';
     position:absolute;
-    /* Hacemos el anillo un poco más grande que el contenedor(4px extra por lado)*/
+    /* Hacemos el anillo un poco más grande que el contene  dor(4px extra por lado)*/
     top: -4px;
     left: -4px;
     right:-4px;

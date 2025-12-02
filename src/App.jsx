@@ -6,6 +6,8 @@ import Inicio from "./components/pages/Inicio";
 import './styles/inicio.css'; 
 import Nosotros from "./components/pages/Nosotros"
 
+
+
 function App() {
   return (
     <BrowserRouter>
