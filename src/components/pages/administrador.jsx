@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 
-const administrador = () => {
-    return (
-        <div>
-            aqui administrador
-        </div>
-    );
+const Administrador = () => {
+  return (
+    <div>
+      <p>aqui administrador</p>
+    </div>
+  );
 };
 
-export default administrador;
+export default Administrador;
