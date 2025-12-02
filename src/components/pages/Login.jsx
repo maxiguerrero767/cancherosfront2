@@ -1,7 +1,8 @@
 import { Modal, Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 
-const Login = ({ show, handleClose }) => {
+const Login = ({ show, handleClose, abrirRegistro }) => {
   const {
     register,
     handleSubmit,
@@ -13,10 +14,16 @@ const Login = ({ show, handleClose }) => {
     console.log("Datos del login:", data);
     reset();
     handleClose();
+    abrirRegistro();
   };
 
   return (
-    <Modal show={show} onHide={handleClose} centered contentClassName="border border-white border-3">
+    <Modal
+      show={show}
+      onHide={handleClose}
+      centered
+      contentClassName="border border-white border-3"
+    >
       <Modal.Header closeButton className="">
         <Modal.Title>Iniciar sesión</Modal.Title>
       </Modal.Header>
@@ -72,6 +79,20 @@ const Login = ({ show, handleClose }) => {
           >
             Iniciar sesión
           </Button>
+          <div className="text-center mt-3">
+            <span>¿Aún no te registraste? </span>
+
+            <button
+              type="button"
+              className="btn btn-link p-0 text-primary"
+              onClick={() => {
+                handleClose(); // Cierra el login
+                abrirRegistro(); // Abre el registro
+              }}
+            >
+              Registrate
+            </button>
+          </div>
         </Form>
       </Modal.Body>
     </Modal>
