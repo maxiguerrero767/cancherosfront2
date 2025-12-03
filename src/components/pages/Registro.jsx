@@ -71,7 +71,7 @@ const Registro = ({ show, handleClose, abrirLogin }) => {
                   {...register("email", {
                     required: "El email es obligatorio",
                     pattern: {
-                      value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                      value: /^[^\s@]+@[^\s@]+\.[A-Za-z]{2,4}$/,
                       message: "Formato de email inválido",
                     },
                   })}
@@ -114,9 +114,9 @@ const Registro = ({ show, handleClose, abrirLogin }) => {
                     required: "La contraseña es obligatoria",
                     pattern: {
                       value:
-                    /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-={}[\]|:;"'<>,.?/]).{8,}$/,
-                  message:
-                    "Mínimo 8 caracteres, una mayúscula, un número y un símbolo especial",
+                        /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-={}[\]|:;"'<>,.?/]).{8,}$/,
+                      message:
+                        "Mínimo 8 caracteres, una mayúscula, un número y un símbolo especial",
                     },
                   })}
                 />
