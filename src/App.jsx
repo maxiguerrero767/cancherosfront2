@@ -9,6 +9,7 @@ import Nosotros from "./components/pages/Nosotros";
 import CatalogoElla from "./components/pages/productos/CatalogoElla";
 import CatalogoHombre from "./components/pages/productos/CatalogoHombre";
 import CatalogoNinios from "./components/pages/productos/CatalogoNinios";
+import CatalogoAccesorio from "./components/pages/productos/CatalogoAccesorio";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             path="/productos/catalogoNinios"
             element={<CatalogoNinios />}
           />
+          <Route path="/productos/catalogoAccesorio" element={<CatalogoAccesorio />} />
         </Routes>
       </main>
       {<Footer></Footer>}

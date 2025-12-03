@@ -38,8 +38,8 @@ const Login = ({ show, handleClose, abrirRegistro }) => {
               {...register("email", {
                 required: "El email es obligatorio",
                 pattern: {
-                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                  message: "El formato del email no es válido",
+                  value: /^[^\s@]+@[^\s@]+\.[A-Za-z]{2,4}$/,
+                  message: "El formato del email no es válido",/* des pues del @ . min 2, max 4 letras */
                 },
               })}
             />
