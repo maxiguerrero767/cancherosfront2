@@ -2,13 +2,16 @@ import { Link } from "react-router-dom";
 import "../../styles/Footer.css"; // Asegúrate de crear este archivo css
 import coachTeamLeader from "../../../public/coachMotivation.bmp";
 import PublicidadFooter from "./PublicidadFooter";
-import { Container } from "react-bootstrap";
+import { Container, Row ,Col } from "react-bootstrap";
+
+
 
 const Footer = () => {
   return (
-    <Container className="footer-container">      
+    <Container className="footer-container">
+      {/* SECCIÓN 1: PROFESORES (Fondo Negro con Imagen) */}
       <Row className="teacher-section">
-        <div className="container">
+        <Col className="container">
           <div className="row align-items-center">
             <div className="col-md-5 text-center">
               {/* Imagen del profesor (puedes cambiar el src por tu imagen real) */}
@@ -33,14 +36,13 @@ const Footer = () => {
               </button>
             </div>
           </div>
-        </div>
-      <Row/>
-      <Row>
-      <div className="app-section text-center text-white py-5">
-        <div className="g-col-6 g-col-md-4">
-        <PublicidadFooter/>
-        </div>
-        <div className="g-col-6 g-col-md-4">
+        </Col>
+      </Row>
+      <Row className="app-section text-center text-white py-5">
+        
+      
+       
+        <Col className="g-col-6 g-col-md-4">
            <h3 className="fw-bold">
             Registrate, reservá y<br />
             armá tu partido!
@@ -64,17 +66,18 @@ const Footer = () => {
               />
             </a>
           </div>
+          <h1>Sitio Amigos</h1>
           <div className="g-col-6 g-col-md-4">
             <PublicidadFooter/>
           </div>
-        <Row/>
-        
-        </div>
+
+        </Col
+        >
        
-      </div>
+      </Row>
       
       {/* SECCIÓN 3: LINKS Y CONTACTO (Fondo Negro Inferior) */}
-      <div className="links-section bg-black text-white py-4">
+      <Row className="links-section bg-black text-white py-4">
         <div className="container">
           <div className="row text-center text-md-start">
             {/* Columna Contactanos */}
@@ -133,7 +136,7 @@ const Footer = () => {
             </small>
           </div>
         </div>
-      </div>
+      </Row>
 
       {/* BOTÓN FLOTANTE WHATSAPP (Como en tu imagen abajo derecha) */}
       <a
@@ -154,7 +157,7 @@ const Footer = () => {
         </svg>
         Contactanos
       </a>
-    <Container/>
+    </Container>
   );
 };
 

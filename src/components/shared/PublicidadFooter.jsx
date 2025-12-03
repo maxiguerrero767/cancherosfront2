@@ -1,7 +1,7 @@
 import '../../styles/publicidadFooter.css'; // Importamos los estilos
 
 const logos = [
-  "Nike", "Adidas", "Puma", "Coca-Cola", "Visa", "Samsung", "Sony" 
+  "Sporting", "MarcAntonio", "Puma", "Coca-Cola", "Sandwitch el Tucu", "Rolling Code School ", "Breaking School dev.BboyLinkin" 
   // O usa imágenes: <img src="..." />
 ];
 
@@ -10,7 +10,7 @@ const AdvertisingBanner = () => {
     <div className="ad-banner-container">
       {/* La capa de degradado para el efecto "desvanecer" */}
       <div className="fade-overlay"></div>
-
+        
       <div className="ad-track">
         {/* Renderizamos doble para lograr el loop infinito perfecto */}
         <div className="ad-content">
