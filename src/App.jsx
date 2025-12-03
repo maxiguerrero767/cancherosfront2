@@ -10,6 +10,7 @@ import CatalogoElla from "./components/pages/productos/CatalogoElla";
 import CatalogoHombre from "./components/pages/productos/CatalogoHombre";
 import CatalogoNinios from "./components/pages/productos/CatalogoNinios";
 import CatalogoAccesorio from "./components/pages/productos/CatalogoAccesorio";
+import Administrador from "./components/pages/administrador";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
             element={<CatalogoNinios />}
           />
           <Route path="/productos/catalogoAccesorio" element={<CatalogoAccesorio />} />
+          <Route path="/admin" element={<Administrador />} />
         </Routes>
       </main>
       {<Footer></Footer>}
