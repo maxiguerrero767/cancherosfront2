@@ -1,4 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Link } from "react-router-dom";
 
 const Inicio = () => {
   return (
@@ -190,7 +191,7 @@ const Inicio = () => {
       <div className="container my-5">
         <h2 className="text-center mb-4">La Indumentaria que Necesitas</h2>
 
-        <div className="row row-cols-1 row-cols-md-3 g-4">
+        <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
           {/* CARD 1 */}
           <div className="col">
             <div className="card text-white border-0 position-relative">
@@ -203,12 +204,12 @@ const Inicio = () => {
               <div className="card-img-overlay d-flex flex-column justify-content-end bg-dark bg-opacity-25 text-center">
                 <h5 className="fw-bold mb-5">Indumentaria para ellas</h5>
                 <p>Todos los modelos que buscas de las mejores marcas.</p>
-                <a
-                  href="#"
+                <Link
+                  to="/productos/catalogoElla"
                   className="btn btn-outline-light boton-catalogo w-50 mx-auto"
                 >
                   Ver Catálogo
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -225,12 +226,12 @@ const Inicio = () => {
               <div className="card-img-overlay d-flex flex-column justify-content-end bg-dark bg-opacity-25 text-center">
                 <h5 className="fw-bold mb-5">Indumentaria para el hombre</h5>
                 <p>Camisetas de los mejores clubes y selecciones.</p>
-                <a
-                  href="#"
+                <Link
+                  to="/productos/catalogoHombre"
                   className="btn btn-outline-light boton-catalogo w-50 mx-auto"
                 >
                   Ver Catálogo
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -247,12 +248,34 @@ const Inicio = () => {
               <div className="card-img-overlay d-flex flex-column justify-content-end bg-dark bg-opacity-25 text-center">
                 <h5 className="fw-bold mb-5">Todo para los niños</h5>
                 <p>Las mejores pilchas para los futuros campeones.</p>
-                <a
-                  href="#"
+                <Link
+                  to="/productos/catalogoNinios"
                   className="btn btn-outline-light boton-catalogo w-50 mx-auto"
                 >
                   Ver Catálogo
-                </a>
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          {/* CARD 4 */}
+          <div className="col">
+            <div className="card text-white border-0 position-relative">
+              <img
+                src="/img/accesorios3.avif"
+                className="card-img card-img-altura"
+                alt="accesorios deportivos"
+              />
+
+              <div className="card-img-overlay d-flex flex-column justify-content-end bg-dark bg-opacity-25 text-center">
+                <h5 className="fw-bold mb-5">Accesorios Deportivos</h5>
+                <p>Todo lo que necesitás para completar tu equipamiento.</p>
+                <Link
+                  to="/productos/catalogoAccesorio"
+                  className="btn btn-outline-light boton-catalogo w-50 mx-auto"
+                >
+                  Ver Catálogo
+                </Link>
               </div>
             </div>
           </div>
