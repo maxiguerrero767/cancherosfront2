@@ -1,11 +1,14 @@
 import React from "react";
-import { Button } from "react-bootstrap";
+import { Button, Tabs, Tab } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-
+import ProductTable from "../admin/products/ProductTable"; 
 const Administrador = () => {
   return (
     <div className="container py-4">
+      <h2 className="mb-4">Panel Administrativo</h2>
+      <Tabs defaultActiveKey="reservas" id="admin-tabs" className="mb-3">
+       <Tab eventKey="reservas" title="📅 Gestión de Reservas">
       <div className="table-responsive">
         <table className="table table-bordered align-middle bg-light rounded-4 overflow-hidden">
           <thead className="table-secondary">
@@ -48,6 +51,14 @@ const Administrador = () => {
           </tbody>
         </table>
       </div>
+      </Tab>
+       <Tab eventKey="productos" title="🛍️ Gestión de Productos">
+          <div className="mt-3">
+            <ProductTable />
+          </div>
+        </Tab>
+
+      </Tabs>
     </div>
   );
 };
