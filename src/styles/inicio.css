@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-/* Carrusel alquiler canchas */
-
-/* Mantener proporción de las imágenes */
-=======
 
 
 #carouselCanchas{
@@ -10,7 +5,6 @@
   height: 100vh;
 }
 
->>>>>>> 371d78ea17a569ce159b35b0969cea9fc24c0ca8
 .carousel-ratio {
   position: relative;
   width: 100%;
