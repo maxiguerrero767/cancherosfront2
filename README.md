@@ -1,16 +1,87 @@
-# React + Vite
+# ⚽ Cancheros
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Cancheros** es una plataforma deportiva que combina información de canchas y complejos con un e-commerce completo de indumentaria y accesorios.  
+Permite navegar, informarse y comprar en un solo lugar, con una interfaz moderna e intuitiva.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📝 ¿Qué te ofrece?
 
-## React Compiler
+Cancheros ofrece:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Información de canchas y complejos deportivos.  
+- Organización de horarios, lugares y grupos para jugar.  
+- Tienda online con productos deportivos para:  
+  - Ella  
+  - Hombre  
+  - Niños  
+  - Accesorios  
 
-## Expanding the ESLint configuration
+Todo dentro de una experiencia unificada.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🚀 Funcionalidades
+
+- Navegación completa mediante React Router.  
+- Catálogo de productos dividido por categorías.  
+- Interfaz responsive con Bootstrap.  
+- Página “Nosotros” con información del equipo.  
+- Componentes reutilizables.  
+
+---
+
+## 🛠️ Tecnologías Utilizadas  
+
+![HTML](https://img.shields.io/badge/HTML-5-6A0DAD?logo=html5&logoColor=white&style=for-the-badge)  
+![CSS](https://img.shields.io/badge/CSS-3-6A0DAD?logo=css3&logoColor=white&style=for-the-badge)  
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6-6A0DAD?logo=javascript&logoColor=white&style=for-the-badge)  
+![React](https://img.shields.io/badge/React-18-6A0DAD?logo=react&logoColor=white&style=for-the-badge)  
+![React Router](https://img.shields.io/badge/React_Router-6-6A0DAD?logo=reactrouter&logoColor=white&style=for-the-badge)  
+![Bootstrap](https://img.shields.io/badge/Bootstrap-5-6A0DAD?logo=bootstrap&logoColor=white&style=for-the-badge)  
+![Vite](https://img.shields.io/badge/Vite-4-6A0DAD?logo=vite&logoColor=white&style=for-the-badge)  
+![SweetAlert2](https://img.shields.io/badge/SweetAlert2-11-6A0DAD?logo=sweetalert2&logoColor=white&style=for-the-badge)
+
+---
+## 🔗 Enlaces Útiles  
+
+![GitHub](https://img.shields.io/badge/GitHub-Repo-00BFA6?logo=github&logoColor=white&style=for-the-badge) → [Repositorio en GitHub](https://github.com/TaliCabana/cancherosfront.git)  
+
+![Netlify](https://img.shields.io/badge/Netlify-Sitio-00BFA6?logo=netlify&logoColor=white&style=for-the-badge) → [Sitio desplegado]()  
+
+---
+
+## 📌 Cómo ejecutar el proyecto
+
+```bash
+ # 1. Abre tu terminal
+  
+ # 2.  Clonar el repositorio
+git clone: https://github.com/TaliCabana/cancherosfront.git
+
+# 3. Ingresar al proyecto
+cd cancherosfront
+
+# 4. Instalar dependencias
+npm install
+
+# 5. Ejecutar servidor de desarrollo
+npm run dev
+```
+---
+## 👥 Autores  
+
+Este proyecto fue desarrollado por un talentoso equipo:  
+
+- [LEDESMA PADILLA, José Ignacio](https://github.com/ledesmapadilla)
+
+- [CABANA, Paula](https://github.com/TaliCabana) 
+
+- [GUERRERO, Maximiliano](https://github.com/maxiguerrero767)
+
+- [JIMENEZ, Germán](https://github.com/Pablo-German-Jimenez)
+
+- [ALBORNOZ, Joaquín](https://github.com/JQNPro10)
+
+---
+
