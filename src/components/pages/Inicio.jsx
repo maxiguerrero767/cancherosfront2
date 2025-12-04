@@ -1,4 +1,3 @@
-import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const Inicio = () => {
@@ -7,11 +6,10 @@ const Inicio = () => {
       {/* carousel alquiler de canchas */}
       <div
         id="carouselCanchas"
-        className="carousel slide position-relative"
+        className="carousel slide position-relative "
         data-bs-ride="carousel"
         data-bs-interval="3000"
       >
-        
         <button className="btn btn-outline-light  position-absolute boton-alquilar">
           Alquilá ya
         </button>
@@ -21,8 +19,8 @@ const Inicio = () => {
             <div className="carousel-ratio">
               <img
                 src="img/banderin.jpg"
-                className="w-100 h-100 object-fit-cover"
-                alt="cancha con banderin"
+                className="w-100 h-100  object-fit-cover"
+                alt="Canchas de fútbol 5"
               />
               <div className="carousel-caption d-none d-md-block page m=0">
                 <div className="bg-dark bg-opacity-50 p-3 rounded  mx-auto caja-texto">
@@ -35,7 +33,7 @@ const Inicio = () => {
             </div>
           </div>
 
-          <div className="carousel-item">
+          <div className="carousel-item ">
             <div className="carousel-ratio">
               <img
                 src="img/luces2.jpg"
@@ -95,32 +93,97 @@ const Inicio = () => {
         </button>
       </div>
 
+      {/* Carrusel de publicidad */}
+      <div className="slider-publicidad my-4">
+        <div className="slider-track">
+          <div className="slide">
+            <img
+              src="../img/publicidades/nike1.jpg"
+              className="publi1"
+              alt="Publicidad 1"
+            />
+          </div>
+          <div className="slide">
+            <img
+              src="../img/publicidades/puma.jpg"
+              className="publi2"
+              alt="Publicidad 2"
+            />
+          </div>
+          <div className="slide">
+            <img
+              src="../img/publicidades/dibu.jpg"
+              className="publi3"
+              alt="Publicidad 3"
+            />
+          </div>
+          <div className="slide">
+            <img
+              src="../img/publicidades/nike.png"
+              className="publi4"
+              alt="Publicidad 4"
+            />
+          </div>
+          <div className="slide">
+            <img
+              src="../img/publicidades/adidas.jpg"
+              className="publi5"
+              alt="Publicidad 5"
+            />
+          </div>
+          <div className="slide">
+            <img
+              src="../img/publicidades/messi.jpg"
+              className="publi6"
+              alt="Publicidad 6"
+            />
+          </div>
 
-
-{/* Carrusel de publicidad */}
-<div className="slider-publicidad my-4">
-  <div className="slider-track">
-    <div className="slide"><img src="../img/publicidades/nike1.jpg" className="publi1" alt="Publicidad 1" /></div>
-    <div className="slide"><img src="../img/publicidades/puma.jpg" className="publi2" alt="Publicidad 2" /></div>
-    <div className="slide"><img src="../img/publicidades/dibu.jpg" className="publi3" alt="Publicidad 3" /></div>
-    <div className="slide"><img src="../img/publicidades/nike.png" className="publi4" alt="Publicidad 4" /></div>
-    <div className="slide"><img src="../img/publicidades/adidas.jpg" className="publi5" alt="Publicidad 5" /></div>
-    <div className="slide"><img src="../img/publicidades/messi.jpg" className="publi6" alt="Publicidad 6" /></div>
-
-    {/* Para que se mueva en forma continua*/}
-    <div className="slide"><img src="../img/publicidades/nike1.jpg" className="publi1" alt="Publicidad 1" /></div>
-    <div className="slide"><img src="../img/publicidades/puma.jpg" className="publi2" alt="Publicidad 2" /></div>
-    <div className="slide"><img src="../img/publicidades/dibu.jpg" className="publi3" alt="Publicidad 3" /></div>
-    <div className="slide"><img src="../img/publicidades/nike.png" className="publi4" alt="Publicidad 4" /></div>
-    <div className="slide"><img src="../img/publicidades/adidas.jpg" className="publi5" alt="Publicidad 5" /></div>
-    <div className="slide"><img src="../img/publicidades/messi.jpg" className="publi6" alt="Publicidad 6" /></div>
-
-  </div>
-</div>
-
-
-
-
+          {/* Para que se mueva en forma continua*/}
+          <div className="slide">
+            <img
+              src="../img/publicidades/nike1.jpg"
+              className="publi1"
+              alt="Publicidad 1"
+            />
+          </div>
+          <div className="slide">
+            <img
+              src="../img/publicidades/puma.jpg"
+              className="publi2"
+              alt="Publicidad 2"
+            />
+          </div>
+          <div className="slide">
+            <img
+              src="../img/publicidades/dibu.jpg"
+              className="publi3"
+              alt="Publicidad 3"
+            />
+          </div>
+          <div className="slide">
+            <img
+              src="../img/publicidades/nike.png"
+              className="publi4"
+              alt="Publicidad 4"
+            />
+          </div>
+          <div className="slide">
+            <img
+              src="../img/publicidades/adidas.jpg"
+              className="publi5"
+              alt="Publicidad 5"
+            />
+          </div>
+          <div className="slide">
+            <img
+              src="../img/publicidades/messi.jpg"
+              className="publi6"
+              alt="Publicidad 6"
+            />
+          </div>
+        </div>
+      </div>
 
       {/* venta productos */}
 
@@ -128,7 +191,6 @@ const Inicio = () => {
         <h2 className="text-center mb-4">La Indumentaria que Necesitas</h2>
 
         <div className="row row-cols-1 row-cols-md-3 g-4">
-
           {/* CARD 1 */}
           <div className="col">
             <div className="card text-white border-0 position-relative">

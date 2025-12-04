@@ -6,6 +6,8 @@ import Inicio from "./components/pages/Inicio";
 import "./styles/inicio.css";
 import Administrador from "./components/pages/administrador";
 
+
+
 function App() {
   return (
     <BrowserRouter>
@@ -17,7 +19,7 @@ function App() {
           <Route path="*" element={<Error404 />} />
           <Route path="/admin" element={<Administrador />} />
         </Routes>
-      </main>
+       </main>
       {<Footer></Footer>}
     </BrowserRouter>
   );
