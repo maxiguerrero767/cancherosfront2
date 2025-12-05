@@ -10,7 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "axios": "^1.13.2",
     "bootstrap": "^5.3.8",
+    "bootstrap-icons": "^1.13.1",
     "cors": "^2.8.5",
     "express": "^5.1.0",
     "express-validator": "^7.3.1",
@@ -20,7 +22,8 @@
     "react-bootstrap": "^2.10.10",
     "react-dom": "^19.2.0",
     "react-hook-form": "^7.66.1",
-    "react-router": "^7.9.6"
+    "react-router-dom": "^6.30.2",
+    "sweetalert2": "^11.26.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
