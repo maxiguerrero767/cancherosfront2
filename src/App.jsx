@@ -12,6 +12,7 @@ import CatalogoNinios from "./components/pages/productos/CatalogoNinios";
 import CatalogoAccesorio from "./components/pages/productos/CatalogoAccesorio";
 import Administrador from "./components/pages/administrador";
 import Contacto from "./components/pages/Contacto"
+import FormularioTurno from "./components/pages/turno/FormularioTurno";
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
             element={<CatalogoNinios />}
           />
           <Route path="/productos/catalogoAccesorio" element={<CatalogoAccesorio />} />
+          <Route path="/turno/formularioTurno" element={<FormularioTurno />} />
           <Route path="/admin" element={<Administrador />} />
         </Routes>
        </main>
