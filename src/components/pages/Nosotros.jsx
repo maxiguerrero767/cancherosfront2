@@ -122,20 +122,20 @@ const Nosotros = () => {
                 variant="top"
                 className="imgCardNosotros mt-3"
 /*                 src={GermanGimenez} */
-                alt="Germán Gimenez"
+                alt="Germán Jimenez"
               />
               <Card.Body>
                 <Card.Title className="nameCardNosotros">
-                  Germán Giménez
+                  Germán Jiménez
                 </Card.Title>
                 <Row>
                   <Col xs={6} className="text-center">
-                    <a href="*" target="_blank" rel="noopener noreferrer">
+                    <a href="https://github.com/Pablo-German-Jimenez" target="_blank" rel="noopener noreferrer">
                       <i className="bi bi-github iconoCard"></i>
                     </a>
                   </Col>
                   <Col xs={6} className="text-center">
-                    <a href="*" target="_blank" rel="noopener noreferrer">
+                    <a href="https://www.linkedin.com/in/pablo-german-jimenez-0b706a200/" target="_blank" rel="noopener noreferrer">
                       <i className="bi bi-linkedin iconoCard"></i>
                     </a>
                   </Col>
@@ -226,7 +226,7 @@ const Nosotros = () => {
                 </Card.Title>
                 <Row>
                   <Col xs={6} className="text-center">
-                    <a href="*" target="_blank" rel="noopener noreferrer">
+                    <a href="https://github.com/JQNPro10" target="_blank" rel="noopener noreferrer">
                       <i className="bi bi-github iconoCard"></i>
                     </a>
                   </Col>
