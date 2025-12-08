@@ -1,8 +1,6 @@
 .textarea-mensaje {
- height: 132px !important;
+  height: 132px !important;
 }
-
-
 
 .boton-volver-inicio {
   margin-top: 10px;
@@ -25,18 +23,19 @@
 }
 
 .boton-formulario {
-     margin-left: auto;
+  margin-left: auto;
   margin-right: auto;
   width: 60%;
   color: var(--blanco);
   border: 2px solid var(--blanco);
-  box-shadow: 1px 1px 10px var(--rosa);
+  box-shadow: 1px 1px 10px var(--blanco);
   background-color: rgba(0, 23, 34, 0.4);
   transition: all 0.3s ease;
 }
 
 .boton-formulario:hover {
   background-color: var(--azulPetroleo);
-  color: var(--rosa);
-  border-color: var(--rosa);
+  color: var(--ambar);
+  border-color: var(--ambar);
+  box-shadow: 1px 1px 10px var(--ambar);
 }
