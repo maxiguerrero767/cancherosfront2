@@ -27,6 +27,10 @@
     color: var(--verdeNeon);
 }
 
+.titulos-redes {
+    color: var(--ambar);
+}
+
 /* --- BOTÓN FLOTANTE WHATSAPP --- */
 .whatsapp-float {
     position: fixed;
