@@ -69,7 +69,7 @@ const Footer = () => {
 
           <div className="text-center mb-4 pt-3 border-top border-secondary">
             <small className="text-muted">
-              © Copyright 2024. Todos los derechos reservados.
+              © Copyright 2025. Todos los derechos reservados.
             </small>
           </div>
         </div>
