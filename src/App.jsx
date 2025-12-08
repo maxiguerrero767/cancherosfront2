@@ -38,6 +38,7 @@ function App() {
           />
           <Route path="/turno/formularioTurno" element={<FormularioTurno />} />
           <Route path="/admin" element={<Administrador />} />
+          <Route path="/contacto" element={<Contacto />} />
         </Routes>
       </main>
 
