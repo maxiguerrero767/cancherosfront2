@@ -1,49 +1,16 @@
-/* =========================================
-   ESTILOS DEL FOOTER
-   ========================================= */
-
-/* --- SECCIÓN PROFESOR (Negro) --- */
-.teacher-section {
-    background-color: #000;
-    padding: 60px 0;
-    position: relative;
-    overflow: hidden;
+:root {
+  --rosa: #f78cc7;
+  --magenta: #e60e42;
+  --azulPetroleo: #043b38;
+  --negro: #00090f;
+  --blanco: #ecf5fb;
+  --grisClaro: #57656c;
+  --grisOscuro: #23333b;
+  --ambar: #ffbf00;
+  --verdeNeon: #14ff00;
+  --verdeExito: #2ecc71;
 }
 
-/* Ajuste para la imagen del profesor */
-.teacher-img {
-    max-height: 350px;
-    object-fit: cover;
-    /* Efecto de recorte o silueta si la imagen es PNG transparente */
-    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.1));
-}
-
-.teacher-text-col {
-    z-index: 2; /* Para que quede sobre cualquier decoración */
-}
-
-/* --- SECCIÓN APP (Azul Petróleo/Marino) --- */
-.app-section {
-    background-color: #1e3a52; /* Un azul oscuro similar al de tu imagen */
-    /* Opcional: degradado sutil */
-    background: linear-gradient(to right, #182e42, #234563); 
-    border-top: 4px solid #FFC107; /* Línea amarilla divisoria opcional */
-}
-
-.small-text {
-    font-size: 0.9rem;
-}
-
-.store-btn img {
-    height: 45px; /* Altura de los botones de descarga */
-    transition: transform 0.2s;
-}
-
-.store-btn img:hover {
-    transform: scale(1.05);
-}
-
-/* --- SECCIÓN LINKS (Negro Inferior) --- */
 .links-section {
     background-color: #000;
     font-size: 0.9rem;
