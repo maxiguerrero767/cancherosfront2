@@ -4,6 +4,7 @@ import Footer from "./components/shared/Footer";
 import Error404 from "./components/pages/Error404";
 import Inicio from "./components/pages/Inicio";
 import "./styles/inicio.css";
+import "./styles/nosotros.css";
 import Login from "./components/pages/Login";
 import Nosotros from "./components/pages/Nosotros";
 import CatalogoElla from "./components/pages/productos/CatalogoElla";
@@ -11,18 +12,16 @@ import CatalogoHombre from "./components/pages/productos/CatalogoHombre";
 import CatalogoNinios from "./components/pages/productos/CatalogoNinios";
 import CatalogoAccesorio from "./components/pages/productos/CatalogoAccesorio";
 import Administrador from "./components/pages/administrador";
-import Contacto from "./components/pages/Contacto"
+import Contacto from "./components/pages/Contacto";
 import FormularioTurno from "./components/pages/turno/FormularioTurno";
-
 
 function App() {
   return (
     <BrowserRouter>
-    <Menu/>
+      <Menu />
       <main>
-        
-         <Routes>
-          <Route path="/" element={<Inicio />} />
+        <Routes>
+    <Route path="/" element={<Inicio />} />  
           <Route path="*" element={<Error404 />} />
           <Route path="/productos/catalogoElla" element={<CatalogoElla />} />
           <Route
@@ -33,12 +32,16 @@ function App() {
             path="/productos/catalogoNinios"
             element={<CatalogoNinios />}
           />
-          <Route path="/productos/catalogoAccesorio" element={<CatalogoAccesorio />} />
+          <Route
+            path="/productos/catalogoAccesorio"
+            element={<CatalogoAccesorio />}
+          />
           <Route path="/turno/formularioTurno" element={<FormularioTurno />} />
           <Route path="/admin" element={<Administrador />} />
         </Routes>
-       </main>
-      <Footer/>
+      </main>
+
+      <Footer />
     </BrowserRouter>
   );
 }

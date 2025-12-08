@@ -1,4 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
+
+import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const Inicio = () => {
@@ -188,98 +191,100 @@ const Inicio = () => {
 
       {/* venta productos */}
 
-      <div className="container my-5">
-        <h2 className="text-center mb-4">La Indumentaria que Necesitas</h2>
+      <div className="my-5">
+        <h2 className="text-center mb-4">La indumentaria que necesitás</h2>
 
-        <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-          {/* CARD 1 */}
-          <div className="col">
-            <div className="card text-white border-0 position-relative">
-              <img
-                src="./img/mujer.avif"
-                className="card-img card-img-altura img-mujer-posicion"
-                alt="mujer con ropa de deporte"
-              />
+        <Container>
+          <Row className="g-3 justify-content-center">
+            {/* CARD 1 */}
+            <Col xs={10} md={6} lg={3}>
+              <div className="card card-catalogo text-white border-0 position-relative">
+                <img
+                  src="./img/mujer.avif"
+                  className="card-img card-img-altura img-mujer-posicion"
+                  alt="mujer con ropa de deporte"
+                />
 
-              <div className="card-img-overlay d-flex flex-column justify-content-end bg-dark bg-opacity-25 text-center">
-                <h5 className="fw-bold mb-5">Indumentaria para ellas</h5>
-                <p>Todos los modelos que buscas de las mejores marcas.</p>
-                <Link
-                  to="/productos/catalogoElla"
-                  className="btn btn-outline-light boton-catalogo w-50 mx-auto"
-                >
-                  Ver Catálogo
-                </Link>
+                <div className="card-img-overlay d-flex flex-column justify-content-end bg-dark bg-opacity-25 text-center">
+                  <h5 className="fw-bold mb-5">Indumentaria para ellas</h5>
+                  <p>Todos los modelos que buscas de las mejores marcas.</p>
+                  <Link
+                    to="/productos/catalogoElla"
+                    className="btn btn-outline-light boton-catalogo w-50 mx-auto"
+                  >
+                    Ver Catálogo
+                  </Link>
+                </div>
               </div>
-            </div>
-          </div>
+            </Col>
 
-          {/* CARD 2 */}
-          <div className="col">
-            <div className="card text-white border-0 position-relative">
-              <img
-                src="/img/hombre.jpg"
-                className="card-img card-img-altura"
-                alt="hombre saltando"
-              />
+            {/* CARD 2 */}
+            <Col xs={10} md={6} lg={3}>
+              <div className="card card-catalogo text-white border-0 position-relative">
+                <img
+                  src="/img/hombre.jpg"
+                  className="card-img card-img-altura"
+                  alt="hombre saltando"
+                />
 
-              <div className="card-img-overlay d-flex flex-column justify-content-end bg-dark bg-opacity-25 text-center">
-                <h5 className="fw-bold mb-5">Indumentaria para el hombre</h5>
-                <p>Camisetas de los mejores clubes y selecciones.</p>
-                <Link
-                  to="/productos/catalogoHombre"
-                  className="btn btn-outline-light boton-catalogo w-50 mx-auto"
-                >
-                  Ver Catálogo
-                </Link>
+                <div className="card-img-overlay d-flex flex-column justify-content-end bg-dark bg-opacity-25 text-center">
+                  <h5 className="fw-bold mb-3">Indumentaria para el hombre</h5>
+                  <p>Camisetas de los mejores clubes y selecciones.</p>
+                  <Link
+                    to="/productos/catalogoHombre"
+                    className="btn btn-outline-light boton-catalogo w-50 mx-auto"
+                  >
+                    Ver Catálogo
+                  </Link>
+                </div>
               </div>
-            </div>
-          </div>
+            </Col>
 
-          {/* CARD 3 */}
-          <div className="col">
-            <div className="card text-white border-0 position-relative">
-              <img
-                src="/img/niños.jpg"
-                className="card-img card-img-altura"
-                alt="niños sonriendo"
-              />
+            {/* CARD 3 */}
+            <Col xs={10} md={6} lg={3}>
+              <div className="card card-catalogo text-white border-0 position-relative">
+                <img
+                  src="/img/niños.jpg"
+                  className="card-img card-img-altura"
+                  alt="niños sonriendo"
+                />
 
-              <div className="card-img-overlay d-flex flex-column justify-content-end bg-dark bg-opacity-25 text-center">
-                <h5 className="fw-bold mb-5">Todo para los niños</h5>
-                <p>Las mejores pilchas para los futuros campeones.</p>
-                <Link
-                  to="/productos/catalogoNinios"
-                  className="btn btn-outline-light boton-catalogo w-50 mx-auto"
-                >
-                  Ver Catálogo
-                </Link>
+                <div className="card-img-overlay d-flex flex-column justify-content-end bg-dark bg-opacity-25 text-center">
+                  <h5 className="fw-bold mb-5">Todo para los niños</h5>
+                  <p>Las mejores pilchas para los futuros campeones.</p>
+                  <Link
+                    to="/productos/catalogoNinios"
+                    className="btn btn-outline-light boton-catalogo w-50 mx-auto"
+                  >
+                    Ver Catálogo
+                  </Link>
+                </div>
               </div>
-            </div>
-          </div>
+            </Col>
 
-          {/* CARD 4 */}
-          <div className="col">
-            <div className="card text-white border-0 position-relative">
-              <img
-                src="/img/accesorios3.avif"
-                className="card-img card-img-altura"
-                alt="accesorios deportivos"
-              />
+            {/* CARD 4 */}
+            <Col xs={10} md={6} lg={3}>
+              <div className="card card-catalogo text-white border-0 position-relative">
+                <img
+                  src="/img/accesorios3.avif"
+                  className="card-img card-img-altura"
+                  alt="accesorios deportivos"
+                />
 
-              <div className="card-img-overlay d-flex flex-column justify-content-end bg-dark bg-opacity-25 text-center">
-                <h5 className="fw-bold mb-5">Accesorios Deportivos</h5>
-                <p>Todo lo que necesitás para completar tu equipamiento.</p>
-                <Link
-                  to="/productos/catalogoAccesorio"
-                  className="btn btn-outline-light boton-catalogo w-50 mx-auto"
-                >
-                  Ver Catálogo
-                </Link>
+                <div className="card-img-overlay d-flex flex-column justify-content-end bg-dark bg-opacity-25 text-center">
+                  <h5 className="fw-bold mb-5">Accesorios Deportivos</h5>
+                  <p>Todo lo que necesitás para completar tu equipamiento.</p>
+                  <Link
+                    to="/productos/catalogoAccesorio"
+                    className="btn btn-outline-light boton-catalogo w-50 mx-auto"
+                  >
+                    Ver Catálogo
+                  </Link>
+                </div>
               </div>
-            </div>
-          </div>
-        </div>
+            </Col>
+          </Row>
+        </Container>
       </div>
     </>
   );

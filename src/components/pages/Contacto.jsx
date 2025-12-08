@@ -9,6 +9,7 @@ import {
 import "../../styles/contacto.css";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2"
+import { Link } from "react-router-dom";
 
 const Contacto = () => {
   const {
@@ -52,7 +53,9 @@ const Contacto = () => {
   };
 
   return (
-    <Container className="my-5 p-4 p-md-5 border rounded-3 shadow-lg bg-body-tertiary">
+    <>
+
+    <Container className="my-3 p-4 p-md-5 border rounded-3 shadow-lg bg-body-tertiary">
       <h1 className="text-center mb-4 display-5">
         ¿Tenés alguna consulta o sugerencia?
       </h1>
@@ -139,17 +142,21 @@ const Contacto = () => {
                   type="tel"
                   placeholder="Teléfono"
                   {...register("telefono", {
-                  required: "El teléfono es obligatorio",
-minLength: {
-  value: 10,
-message: "El número de teléfono debe tener al menos 10 caracteres."},
-maxLength: {
-  value: 17,
-message: "El número de teléfono no puede exceder los 17 caracteres."},
-pattern:{
-  value: telefonoValidado,
-  message: "Solo se permiten caracteres numéricos."
-}
+                    required: "El teléfono es obligatorio",
+                    minLength: {
+                      value: 10,
+                      message:
+                        "El número de teléfono debe tener al menos 10 caracteres.",
+                    },
+                    maxLength: {
+                      value: 17,
+                      message:
+                        "El número de teléfono no puede exceder los 17 caracteres.",
+                    },
+                    pattern: {
+                      value: telefonoValidado,
+                      message: "Solo se permiten caracteres numéricos.",
+                    },
                   })}
                   isInvalid={!!errors.telefono}
                 />
@@ -170,17 +177,20 @@ pattern:{
                   as="textarea"
                   placeholder="Escribe tu mensaje o consulta"
                   {...register("mensaje", {
-required: "El mensaje es obligatorio.",
-                  minLength: {
-                    value: 10,
-                  message: "El texto ingresado debe contener al menos 10 caracteres."},
-maxLength:{
-  value: 500,
-message: "El mensaje es demasiado largo, no puede contener más de 500 caracteres."}
+                    required: "El mensaje es obligatorio.",
+                    minLength: {
+                      value: 10,
+                      message:
+                        "El texto ingresado debe contener al menos 10 caracteres.",
+                    },
+                    maxLength: {
+                      value: 500,
+                      message:
+                        "El mensaje es demasiado largo, no puede contener más de 500 caracteres.",
+                    },
                   })}
-isInvalid={!!errors.mensaje}                
+                  isInvalid={!!errors.mensaje}
                   className="textarea-mensaje"
-                  
                 />
                 <Form.Control.Feedback type="invalid">
                   {errors.mensaje?.message}
@@ -189,7 +199,7 @@ isInvalid={!!errors.mensaje}
 
               {/* Botón de Enviar */}
               <div className="d-grid">
-                <Button variant="primary" type="submit" className="py-3">
+                <Button variant="primary" type="submit" className="py-3 boton-formulario">
                   Enviar Consulta
                 </Button>
               </div>
@@ -197,15 +207,18 @@ isInvalid={!!errors.mensaje}
           </Row>
         </Container>
 
-        {/* Si necesitas un botón de "Volver" */}
-        {/* <div className="text-center mt-3">
-                    <Button as={Link} to="/" variant="secondary">
-                        Volver al Inicio
-                    </Button>
-                </div> */}
       </Form>
+
     </Container>
+              <div className="d-flex justify-content-center mb-4">
+        <Button as={Link} to="/" className="boton-volver-inicio">
+          <i className="bi bi-arrow-bar-left"> Volver al Inicio </i>
+        </Button>
+      </div>
+    </>
   );
+  
 };
+
 
 export default Contacto;
