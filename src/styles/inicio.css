@@ -1,3 +1,6 @@
+
+
+
 :root {
   --rosa: #f78cc7;
   --magenta: #e60e42;
@@ -321,6 +324,14 @@
     padding: 10px;
   }
 }
+
+/* Achicar modal de "Ver Producto" */
+.modal-dialog.modal-ver-producto {
+  max-width: 240px !important;
+  width: 240px !important;
+  margin: auto !important;
+}
+
 
 /* BOTÓN ALQUILÁ YA - ajuste móvil */
 @media (max-width: 767px) {

@@ -58,10 +58,10 @@ const Footer = () => {
               <h6 className="titulos-redes fw-bold mb-1">Descargá la app</h6>
               <div className="d-flex justify-content-center gap-3 social-icons">
                 <Link to="*">
-                  <i class="bi bi-apple"></i>
+                  <i className="bi bi-apple"></i>
                 </Link>
                 <Link to="*">
-                  <i class="bi bi-google-play"></i>{" "}
+                  <i className="bi bi-google-play"></i>{" "}
                 </Link>
               </div>
             </div>
@@ -82,7 +82,7 @@ const Footer = () => {
         target="_blank"
         rel="noopener noreferrer"
       >
-        <i class="bi bi-whatsapp"></i>
+        <i className="bi bi-whatsapp"></i>
         Contactanos
       </a>
     </Container>
