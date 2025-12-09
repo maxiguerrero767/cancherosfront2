@@ -1,121 +1,119 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { Form, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import Swal from "sweetalert2";
-import { Form, Button, Row, Col, CardHeader } from "react-bootstrap";
 
-const FormularioTurno = () => {
+const FormularioTurno = ({ turnoEditar, guardarTurno, cerrarModal }) => {
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: turnoEditar || {
+      nombre: "",
+      fecha: "",
+      hora: "",
+      estado: "A confirmar",
+    },
+  });
 
-  const hoy = new Date().toISOString().split("T")[0];
-
-  const horarios = Array.from(
-    { length: 13 },
-    (_, i) => `${(i + 8).toString().padStart(2, "0")}:00`
-  );
+  // Si estamos editando, reseteamos el formulario con los datos
+  useEffect(() => {
+    if (turnoEditar) {
+      reset(turnoEditar);
+    }
+  }, [turnoEditar, reset]);
 
   const onSubmit = (data) => {
-    Swal.fire({
-      icon: "success",
-      title: "Turno solicitado",
-      html: `
-        <p><b>Usuario:</b> ${data.usuario}</p>
-        <p><b>Cancha:</b> ${data.cancha}</p>
-        <p><b>Fecha:</b> ${data.fecha}</p>
-        <p><b>Horario:</b> ${data.horario}</p>
-      `,
-    });
-    reset();
-  };
-
-  const onErrors = () => {
-    Swal.fire({
-      icon: "error",
-      title: "Faltan datos",
-      text: "Completá todos los campos obligatorios.",
+    guardarTurno(data);
+    cerrarModal && cerrarModal();
+    reset({
+      nombre: "",
+      fecha: "",
+      hora: "",
+      estado: "A confirmar",
     });
   };
 
   return (
-    <div>
-      <article className="container my-5">
-        <CardHeader className="bg-ModalVer shadow-gm rounded-2 py-3">
-          <h2 className="text-center text-light fw-semibold mb-1">
-            Solicitar turno
-          </h2>
-          <p className="text-center text-light mb-0 fs-6">
-            Ingrese los datos para reservar la cancha.
-          </p>
-        </CardHeader>
+    <Form onSubmit={handleSubmit(onSubmit)}>
+      <Form.Group className="mb-3">
+        <Form.Label>Nombre completo *</Form.Label>
+        <Form.Control
+          type="text"
+          placeholder="Nommbre completo"
+          {...register("nombre", {
+            required: "El nombre es obligatorio",
+            minLength: {
+              value: 3,
+              message: "Debe tener al menos 3 caracteres",
+            },
+            pattern: {
+              value: /^[A-Za-zÁÉÍÓÚáéíóúñÑ ]+$/,
+              message:
+                "El nombre no puede contener números ni caracteres especiales",
+            },
+          })}
+        />
+        {errors.nombre && (
+          <Form.Text className="text-danger">{errors.nombre.message}</Form.Text>
+        )}
+      </Form.Group>
 
-        <Form
-          className="border rounded shadow-lg mb-5 p-3"
-          onSubmit={handleSubmit(onSubmit, onErrors)}
+      <Form.Group className="mb-2">
+        <Form.Label>Fecha *</Form.Label>
+        <Form.Control
+          type="date"
+          min={new Date().toISOString().split("T")[0]} // solo fechas desde hoy en adelante
+          {...register("fecha", { required: "La fecha es obligatoria" })}
+        />
+        {errors.fecha && (
+          <Form.Text className="text-danger">{errors.fecha.message}</Form.Text>
+        )}
+      </Form.Group>
+
+      <Form.Group className="mb-2">
+        <Form.Label>Hora *</Form.Label>
+        <Form.Select
+          {...register("hora", { required: "La hora es obligatoria" })}
         >
-          <Row>
-            <Col md={6}>
-              <Form.Group className="mb-3">
-                <Form.Label>Usuario*</Form.Label>
-                <Form.Control
-                  type="text"
-                  {...register("usuario", { required: true })}
-                  placeholder="Ej: Juan Perez"
-                />
-              </Form.Group>
-            </Col>
+          <optgroup label="Mañana">
+            <option value="09:00">09:00</option>
+            <option value="10:00">10:00</option>
+            <option value="11:00">11:00</option>
+            <option value="12:00">12:00</option>
+            <option value="13:00">13:00</option>
+          </optgroup>
+          <optgroup label="Tarde">
+            <option value="15:00">15:00</option>
+            <option value="16:00">16:00</option>
+            <option value="17:00">17:00</option>
+            <option value="18:00">18:00</option>
+            <option value="19:00">19:00</option>
+            <option value="20:00">20:00</option>
+            <option value="21:00">21:00</option>
+            <option value="22:00">22:00</option>
+            <option value="23:00">23:00</option>
+            <option value="24:00">24:00</option>
+          </optgroup>
+        </Form.Select>
+        {errors.hora && (
+          <Form.Text className="text-danger">{errors.hora.message}</Form.Text>
+        )}
+      </Form.Group>
 
-            <Col md={6}>
-              <Form.Group className="mb-3">
-                <Form.Label>Cancha*</Form.Label>
-                <Form.Select {...register("cancha", { required: true })}>
-                  <option value="">Seleccione una cancha</option>
-                  <option value="Cancha 1">Cancha 1</option>
-                  <option value="Cancha 2">Cancha 2</option>
-                  <option value="Cancha 3">Cancha 3</option>
-                </Form.Select>
-              </Form.Group>
-            </Col>
-          </Row>
+      <Form.Group className="mb-2">
+        <Form.Label>Estado</Form.Label>
+        <Form.Select {...register("estado")}>
+          <option value="A confirmar">A confirmar</option>
+          
+        </Form.Select>
+      </Form.Group>
 
-          <Row>
-            <Col md={6}>
-              <Form.Group className="mb-3">
-                <Form.Label>Fecha*</Form.Label>
-                <Form.Control
-                  type="date"
-                  min={hoy}
-                  {...register("fecha", { required: true })}
-                />
-              </Form.Group>
-            </Col>
-
-            <Col md={6}>
-              <Form.Group className="mb-3">
-                <Form.Label>Horario*</Form.Label>
-                <Form.Select {...register("horario", { required: true })}>
-                  <option value="">Seleccione un horario</option>
-                  {horarios.map((hora) => (
-                    <option key={hora} value={hora}>
-                      {hora}
-                    </option>
-                  ))}
-                </Form.Select>
-              </Form.Group>
-            </Col>
-          </Row>
-
-          <div className="d-flex justify-content-center mt-3">
-            <Button variant="success" type="submit" className="px-4">
-              Solicitar turno
-            </Button>
-          </div>
-        </Form>
-      </article>
-    </div>
+      <Button type="submit" className="mt-2">
+        Guardar
+      </Button>
+    </Form>
   );
 };
 

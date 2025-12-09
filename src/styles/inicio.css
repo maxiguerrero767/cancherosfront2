@@ -325,6 +325,14 @@
   }
 }
 
+/* Achicar modal de "Ver Producto" */
+.modal-dialog.modal-ver-producto {
+  max-width: 240px !important;
+  width: 240px !important;
+  margin: auto !important;
+}
+
+
 /* BOTÓN ALQUILÁ YA - ajuste móvil */
 @media (max-width: 767px) {
   .boton-alquilar {
