@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital@0;1&display=swap');
 
 .error-container {
-  height: 100vh;
+  height: 90vh;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -11,7 +11,6 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  
   color: white;
   padding: 20px;
 }
@@ -37,9 +36,8 @@
 }
 
 .error-text {
-  font-family: 'Playfair Display', 'Georgia', serif; 
+  font-family: 'Arial', sans-serif;
   font-size: 1.3rem;
-  font-style: italic; 
   line-height: 1.5;
   margin-bottom: 50px;
   max-width: 500px;
