@@ -1,7 +1,9 @@
+import React, { useEffect } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 
-const Registro = ({ show, handleClose, abrirLogin }) => {
+const Registro = ({ show, handleClose, setUsuarioLogueado, abrirLogin }) => {
   const {
     register,
     handleSubmit,
@@ -9,10 +11,22 @@ const Registro = ({ show, handleClose, abrirLogin }) => {
     formState: { errors },
   } = useForm();
 
+  // Resetea el formulario cada vez que se abre
+  useEffect(() => {
+    if (show) reset();
+  }, [show, reset]);
+
   const onSubmit = (data) => {
-    console.log("Datos del registro:", data);
-    reset();
-    handleClose();
+    Swal.fire({
+      title: `¡Bienvenido, ${data.nombre}!`,
+      icon: "success",
+      timer: 2000,
+      showConfirmButton: false,
+    });
+    setUsuarioLogueado({ nombre: data.nombre, isAdmin: false });
+
+    // PASAMOS true para indicar que el registro fue exitoso
+    handleClose(true);
   };
 
   const irALogin = () => {
@@ -42,7 +56,7 @@ const Registro = ({ show, handleClose, abrirLogin }) => {
                 <Form.Label>Nombre completo *</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Juan Pérez"
+                  placeholder="Nombre completo"
                   {...register("nombre", {
                     required: "El nombre es obligatorio",
                     minLength: {
@@ -88,7 +102,7 @@ const Registro = ({ show, handleClose, abrirLogin }) => {
                 <Form.Label>Teléfono *</Form.Label>
                 <Form.Control
                   type="tel"
-                  placeholder="1122334455"
+                  placeholder="sin codigo de area"
                   {...register("telefono", {
                     required: "El teléfono es obligatorio",
                     pattern: {

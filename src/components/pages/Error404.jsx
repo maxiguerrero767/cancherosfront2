@@ -15,7 +15,7 @@ const Error404 = () => {
     >
       <h1 className="error-title">ERROR 404</h1>
       
-      <h2 className="error-subtitle">PAGINA NO ENCONTRADA</h2>
+      <h2 className="error-subtitle">PÁGINA NO ENCONTRADA</h2>
       
       <p className="error-text">
         Como una final perdida, <br />

@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../../styles/catalogos.css";
 
-const CatalogoElla = () => {
-  const productos = [
+const CatalogoElla = ({ productosCreados }) => {
+  const productosOriginales = [
     {
       id: 1,
       nombre: "Conjunto Deportivo Nike",
@@ -29,6 +29,11 @@ const CatalogoElla = () => {
       descripcion: "Buzo con tecnología Dry-Cell",
       talles: "S, M, L, XL",
     },
+  ];
+  // Filtra productos creados que sean de la categoría "ellas"
+  const productos = [
+    ...productosOriginales,
+    ...productosCreados.filter((p) => p.categoria === "ellas"),
   ];
 
   return (

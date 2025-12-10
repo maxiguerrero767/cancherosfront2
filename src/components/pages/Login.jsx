@@ -1,30 +1,37 @@
 import { Modal, Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
-const Login = ({ show, handleClose, abrirRegistro }) => {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm();
+
+const Login = ({ show, handleClose, abrirRegistro, setUsuarioLogueado }) => {
+  const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
   const onSubmit = (data) => {
-    console.log("Datos del login:", data);
-    reset();
-    handleClose();
-    abrirRegistro();
+    const adminEmail = import.meta.env.VITE_API_EMAIL;
+    const adminPassword = import.meta.env.VITE_API_PASSWORD;
+
+    if (data.email === adminEmail && data.password === adminPassword) {
+      setUsuarioLogueado({ isAdmin: true });
+      reset();
+      handleClose();
+      Swal.fire({
+        icon: "success",
+        title: "Bienvenido administrador",
+        text: "Has iniciado sesión correctamente",
+      });
+    } else {
+      setUsuarioLogueado({ isAdmin: false });
+      Swal.fire({
+        icon: "error",
+        title: "Credenciales incorrectas",
+        text: "El email o la contraseña son inválidos",
+      });
+    }
   };
 
   return (
-    <Modal
-      show={show}
-      onHide={handleClose}
-      centered
-      contentClassName="border border-white border-3"
-    >
-      <Modal.Header closeButton className="">
+    <Modal show={show} onHide={handleClose} centered contentClassName="border border-white border-3">
+      <Modal.Header closeButton>
         <Modal.Title>Iniciar sesión</Modal.Title>
       </Modal.Header>
 
@@ -34,20 +41,16 @@ const Login = ({ show, handleClose, abrirRegistro }) => {
             <Form.Label>Email</Form.Label>
             <Form.Control
               type="email"
-              placeholder="juan@email.com"
+              placeholder="email@email.com"
               {...register("email", {
                 required: "El email es obligatorio",
                 pattern: {
                   value: /^[^\s@]+@[^\s@]+\.[A-Za-z]{2,4}$/,
-                  message: "El formato del email no es válido",/* des pues del @ . min 2, max 4 letras */
+                  message: "El formato del email no es válido",
                 },
               })}
             />
-            {errors.email && (
-              <Form.Text className="text-danger">
-                {errors.email.message}
-              </Form.Text>
-            )}
+            {errors.email && <Form.Text className="text-danger">{errors.email.message}</Form.Text>}
           </Form.Group>
 
           <Form.Group className="mb-3">
@@ -58,38 +61,19 @@ const Login = ({ show, handleClose, abrirRegistro }) => {
               {...register("password", {
                 required: "La contraseña es obligatoria",
                 pattern: {
-                  value:
-                    /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-={}[\]|:;"'<>,.?/]).{8,}$/,
-                  message:
-                    "Mínimo 8 caracteres, una mayúscula, un número y un símbolo especial",
+                  value: /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-={}[\]|:;"'<>,.?/]).{8,}$/,
+                  message: "Mínimo 8 caracteres, una mayúscula, un número y un símbolo especial",
                 },
               })}
             />
-            {errors.password && (
-              <Form.Text className="text-danger">
-                {errors.password.message}
-              </Form.Text>
-            )}
+            {errors.password && <Form.Text className="text-danger">{errors.password.message}</Form.Text>}
           </Form.Group>
 
-          <Button
-            variant="primary"
-            type="submit"
-            className="w-50 mx-auto d-block"
-          >
-            Iniciar sesión
-          </Button>
+          <Button variant="primary" type="submit" className="w-50 mx-auto d-block">Iniciar sesión</Button>
+
           <div className="text-center mt-3">
             <span>¿Aún no te registraste? </span>
-
-            <button
-              type="button"
-              className="btn btn-link p-0 text-primary"
-              onClick={() => {
-                handleClose(); // Cierra el login
-                abrirRegistro(); // Abre el registro
-              }}
-            >
+            <button type="button" className="btn btn-link p-0 text-primary" onClick={() => { handleClose(); abrirRegistro(); }}>
               Registrate
             </button>
           </div>

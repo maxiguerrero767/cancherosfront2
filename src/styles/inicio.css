@@ -1,8 +1,17 @@
 
 
-#carouselCanchas{
-  width: 100%;
-  height: 100vh;
+
+:root {
+  --rosa: #f78cc7;
+  --magenta: #e60e42;
+  --azulPetroleo: #043b38;
+  --negro: #00090f;
+  --blanco: #ecf5fb;
+  --grisClaro: #57656c;
+  --grisOscuro: #23333b;
+  --ambar: #ffbf00;
+  --verdeNeon: #14ff00;
+  --verdeExito: #2ecc71;
 }
 
 .carousel-ratio {
@@ -22,7 +31,7 @@
 .carousel-caption .caja-texto {
   width: 50%;
   padding: 0px;
-  color: white;
+  color: var(--blanco);
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 5px;
 }
@@ -31,7 +40,6 @@
 .img-mujer-posicion {
   object-position: center 30%;
 }
-
 
 /* BOTÓN "ALQUILÁ YA" */
 .boton-alquilar {
@@ -43,21 +51,37 @@
   padding: 8px 20px;
   font-size: 1.1rem;
   font-weight: 600;
-  color: white; 
-  border: 2px solid white;
-  background-color:transparent;
+  color: var(--blanco);
+  border: 2px solid var(--blanco);
+  box-shadow: 1px 1px 10px var(--blanco);
+  background-color: rgba(0, 23, 34, 0.4);
   transition: all 0.3s ease;
 }
 
-
 .boton-alquilar:hover {
-  background-color: rgba(255, 255, 255, 0.25); 
-  color: black; 
-  border-color: white;
+  background-color: var(--azulPetroleo);
+  color: var(--ambar);
+  border-color: var(--ambar);
+  box-shadow: 1px 1px 10px var(--ambar);
 }
 
 /* cards */
 
+.card-catalogo {
+  box-shadow: 3px 3px 20px var(--verdeExito);
+  overflow: hidden;
+  margin: 10px;
+  transition: all 0.3s ease;
+    color: #fff;
+  text-shadow: 0px 0px 12px rgba(0,0,0,1);
+}
+
+.card-catalogo:hover {
+  transform: scale(1.15);
+  box-shadow: 3px 3px 20px var(--verdeNeon3);
+  overflow: hidden;
+  box-shadow: 2px 2px 25px var(--verdeNeon);
+}
 
 .card-img-altura {
   width: 100%;
@@ -70,13 +94,12 @@
 .card .card-img-overlay {
   display: flex;
   flex-direction: column;
-  justify-content: space-between; 
+  justify-content: space-between;
   align-items: center;
   text-align: center;
   padding: 10px;
   background-color: rgba(0, 0, 0, 0.25);
 }
-
 
 .card .contenido-texto {
   display: flex;
@@ -109,15 +132,15 @@
 }
 
 .slider-publicidad .slider-track {
-  display: flex; 
+  display: flex;
   flex-wrap: nowrap;
   animation: scrollLeft 20s linear infinite;
 }
 
 .slider-publicidad .slide {
-  flex: 0 0 auto; 
+  flex: 0 0 auto;
   width: 200px;
-  height: 120px; 
+  height: 120px;
   margin-right: 0px;
 }
 
@@ -129,20 +152,31 @@
 
 /* Posicionamiento individual de imágenes */
 
-.slider-publicidad .publi1 { object-position: center 20%; }
-.slider-publicidad .publi2 { object-position: center 50%; }
-.slider-publicidad .publi3 { object-position: center 70%; }
-.slider-publicidad .publi4 { object-position: center 60%; }
-.slider-publicidad .publi5 { object-position: center 80%; }
+.slider-publicidad .publi1 {
+  object-position: center 20%;
+}
+.slider-publicidad .publi2 {
+  object-position: center 50%;
+}
+.slider-publicidad .publi3 {
+  object-position: center 70%;
+}
+.slider-publicidad .publi4 {
+  object-position: center 60%;
+}
+.slider-publicidad .publi5 {
+  object-position: center 80%;
+}
 
 /* Animación continua */
 @keyframes scrollLeft {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); } /* mantiene loop suave */
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  } /* mantiene loop suave */
 }
-
-
-
 
 .card .boton-catalogo {
   margin-top: 10px;
@@ -150,19 +184,19 @@
   max-width: 180px;
   padding: 6px 14px;
   font-size: 0.9rem;
-  color: white; 
-  border: 2px solid white; 
-  background-color: rgba(255, 255, 255, 0.1); 
+  color: var(--blanco);
+  border: 2px solid var(--blanco);
+  box-shadow: 1px 1px 10px var(--blanco);
+  background-color: rgba(0, 23, 34, 0.4);
   transition: all 0.3s ease;
 }
 
 .card .boton-catalogo:hover {
-  background-color: rgba(255, 255, 255, 0.25); 
-  color: black; 
-  border-color: white; 
+  background-color: var(--azulPetroleo);
+  color: var(--ambar);
+  border-color: var(--ambar);
+  box-shadow: 1px 1px 10px var(--ambar);
 }
-
-
 
 /*MEDIA QUERIES */
 
@@ -188,7 +222,7 @@
     gap: 5px;
   }
 
-  /* Botón en la parte de abajo */
+  /* Botón en la parte de abarosajo */
   .card .boton-catalogo {
     margin-top: auto;
     width: 70%;
@@ -214,7 +248,6 @@
   }
 }
 
-
 /* TABLET / MEDIANO */
 @media (min-width: 768px) and (max-width: 991px) {
   .carousel-ratio {
@@ -234,7 +267,7 @@
     width: 60%;
     font-size: 0.9rem;
   }
-   /* Overlay de las cards */
+  /* Overlay de las cards */
   .card .card-img-overlay {
     display: flex;
     flex-direction: column;
@@ -249,16 +282,15 @@
     gap: 5px;
   }
 
-  
   .card .boton-catalogo {
-    margin-top: auto; 
+    margin-top: auto;
     width: 60%;
     font-size: 0.9rem;
   }
 
   /*  aumentar altura de las fotos */
   .card-img-altura {
-    height: 280px; 
+    height: 280px;
   }
 
   /* Reducir espacio entre cards  */
@@ -273,13 +305,12 @@
 @media (min-width: 992px) {
   /* Títulos y párrafos */
   .card .contenido-texto {
-    flex-grow: 0; 
+    flex-grow: 0;
     gap: 5px;
   }
 
-  
   .card .boton-catalogo {
-    margin-top: auto; 
+    margin-top: auto;
     width: 50%;
     font-size: 1rem;
   }
@@ -294,10 +325,18 @@
   }
 }
 
+/* Achicar modal de "Ver Producto" */
+.modal-dialog.modal-ver-producto {
+  max-width: 240px !important;
+  width: 240px !important;
+  margin: auto !important;
+}
+
+
 /* BOTÓN ALQUILÁ YA - ajuste móvil */
 @media (max-width: 767px) {
   .boton-alquilar {
-    top: 90%; 
+    top: 90%;
     right: 50%;
     transform: translate(50%, -50%); /* centrado horizontal */
     font-size: 1rem; /* opcional, reducir tamaño en móvil */

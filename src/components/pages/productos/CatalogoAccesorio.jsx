@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../../styles/catalogos.css";
 
-const CatalogoAccesorio = () => {
-  const productos = [
+const CatalogoAccesorio = ({ productosCreados }) => {
+  const productosOriginales = [
     {
       id: 1,
       nombre: "Guantes Nike Pro",
@@ -29,6 +29,12 @@ const CatalogoAccesorio = () => {
       descripcion: "Protección ligera y resistente para entrenamiento.",
       talles: "S, M, L",
     },
+  ];
+
+  //  combina productos originales con los creados de categoría "accesorios"
+  const productos = [
+    ...productosOriginales,
+    ...productosCreados.filter((p) => p.categoria === "accesorios"),
   ];
 
   return (
@@ -59,7 +65,7 @@ const CatalogoAccesorio = () => {
                   <span className="text-success fs-5">{producto.precio}</span>
                 </p>
                 <p className="mb-3">
-                  <strong>Talles:</strong> {producto.talles}
+                  <strong>Talles disponibles:</strong> {producto.talles}
                 </p>
                 <button className="botonComprar rounded">Comprar</button>
               </div>
