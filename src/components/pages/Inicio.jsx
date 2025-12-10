@@ -3,11 +3,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 import ModalTurno from "./turno/ModalTurno";
 import Registro from "./Registro";
-import ResumenTurno from "./turno/ResumenTurno";
 import Swal from "sweetalert2";
 import { useEffect } from "react";
 import "../../styles/resumenTurno.css";
-
 
 const Inicio = ({ usuarioLogueado, setUsuarioLogueado }) => {
   const [showModalTurno, setShowModalTurno] = useState(false);
@@ -55,7 +53,6 @@ const Inicio = ({ usuarioLogueado, setUsuarioLogueado }) => {
   const abrirLogin = () => {
     // cerrar modal de registro y abrir login
     setShowRegistro(false);
-    
   };
 
   return (
@@ -65,7 +62,6 @@ const Inicio = ({ usuarioLogueado, setUsuarioLogueado }) => {
         id="carouselCanchas"
         className="carousel slide position-relative"
         data-bs-ride="carousel"
-        data-bs-interval="3000"
       >
         <button
           className="btn btn-outline-light  position-absolute boton-alquilar"
