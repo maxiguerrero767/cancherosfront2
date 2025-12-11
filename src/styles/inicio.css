@@ -78,7 +78,12 @@
   transition: all 0.3s ease;
   color: var(--blanco);
   text-shadow: 0px 0px 500px rgba(0, 0, 0, 1);
-  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+.texto-card {
+  flex: 1;
 }
 
 .card-catalogo:hover {
@@ -168,6 +173,7 @@
   box-shadow: 1px 1px 10px var(--blanco);
   background-color: rgba(0, 23, 34, 0.4);
   transition: all 0.3s ease;
+  margin-top: auto;
 }
 
 .card .boton-catalogo:hover {

@@ -253,20 +253,20 @@ const Inicio = ({ usuarioLogueado, setUsuarioLogueado }) => {
       {/* venta productos */}
 
       <div className="container my-5">
-        <h2 className="text-center mb-4">La Indumentaria que Necesitas</h2>
+        <h2 className="text-center mb-4">La Indumentaria que Necesitás</h2>
         <Container>
           <Row className="row-gap-3 justify-content-center">
             {/* CARD 1 */}
             <Col xs={10} sm={8} md={6} xl={3}>
-              <Card className="card-catalogo card-imagen-contenedor">
+              <Card className="card-catalogo card-imagen-contenedor d-flex flex-column h-md-100">
                 <Card.Img
                   src="./img/mujer.avif"
                   className="img-posicion"
                   alt="mujer con ropa deportiva"
                 />
-                <Card.ImgOverlay>
+                <Card.ImgOverlay className="d-flex align-items-center">
                   <Card.Title>Indumentaria para ellas</Card.Title>
-                  <Card.Text className="titulo-card h-100">
+                  <Card.Text className="texto-card flex-grow-1 d-flex align-items-center">
                     Todos los modelos que buscás de las mejores marcas.
                   </Card.Text>
                   <Link
@@ -280,11 +280,11 @@ const Inicio = ({ usuarioLogueado, setUsuarioLogueado }) => {
             </Col>
             {/* CARD 2 */}
             <Col xs={10} sm={8} md={6} xl={3}>
-              <Card className="card-catalogo h-100 card-imagen-contenedor">
+              <Card className="card-catalogo h-md-100 card-imagen-contenedor">
                 <Card.Img src="/img/hombre.jpg" className="img-posicion" alt="hombre saltando" />
                 <Card.ImgOverlay>
                   <Card.Title>Indumentaria para el hombre</Card.Title>
-                  <Card.Text>
+                  <Card.Text className="texto-card flex-grow-1 d-flex align-items-center">
                     Camisetas de los mejores clubes y selecciones.
                   </Card.Text>
 
@@ -299,7 +299,7 @@ const Inicio = ({ usuarioLogueado, setUsuarioLogueado }) => {
             </Col>
             {/* CARD 3 */}
             <Col xs={10} sm={8} md={6} xl={3}>
-              <Card className="card-catalogo h-100 card-imagen-contenedor">
+              <Card className="card-catalogo h-md-100 card-imagen-contenedor">
                 <Card.Img
                   src="/img/niños.jpg"
                   className="img-posicion"
@@ -308,7 +308,7 @@ const Inicio = ({ usuarioLogueado, setUsuarioLogueado }) => {
                 />
                 <Card.ImgOverlay>
                   <Card.Title>Todo para los niños</Card.Title>
-                  <Card.Text>
+                  <Card.Text className="texto-card flex-grow-1 d-flex align-items-center">
                     Las mejores pilchas para los futuros campeones.
                   </Card.Text>
                   <Link
@@ -322,7 +322,7 @@ const Inicio = ({ usuarioLogueado, setUsuarioLogueado }) => {
             </Col>
             {/* CARD 4 */}
             <Col xs={10} sm={8} md={6} xl={3}>
-              <Card className="card-catalogo h-100 card-imagen-contenedor">
+              <Card className="card-catalogo h-md-100 card-imagen-contenedor">
                 <Card.Img
                   src="/img/accesorios3.avif"
                   className="img-posicion"
@@ -330,7 +330,7 @@ const Inicio = ({ usuarioLogueado, setUsuarioLogueado }) => {
                 />
                 <Card.ImgOverlay>
                   <Card.Title>Accesorios Deportivos</Card.Title>
-                  <Card.Text>
+                  <Card.Text className="texto-card flex-grow-1 d-flex align-items-center">
                     Todo lo que necesitás para completar tu equipamiento.
                   </Card.Text>
                   <Link
