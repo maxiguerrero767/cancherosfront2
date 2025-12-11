@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 
 import '../../styles/error404.css'; 
 
@@ -23,10 +24,16 @@ const Error404 = () => {
         el correcto.
       </p>
       
-      <Link to="/" className="btn-inicio">
+{/*       <Link to="/" className="btn-inicio">
         IR A INICIO
-      </Link>
+      </Link> */}
+            <div className="justify-content-center mb-4">
+        <Button as={Link} to="/" className="boton-volver-inicio">
+          <span><i className="bi bi-arrow-bar-left"> Volver al Inicio </i></span>
+        </Button>
+      </div>
     </div>
+    
   );
 };
 
