@@ -15,10 +15,9 @@ const Menu = ({
     <header className="navbar-oscuro">
       <Link to="/" className="text-decoration-none">
         <div className="logo-container">
-          {/*           <span className="logo-icon">⚽</span>
-           */}
+          
           <img src={logoDibuNeon17} alt="logo cancheros" className="logo-img" />
-          {/* <span className="logo-text">Cancheros TRUCHO</span> */}
+          
         </div>
       </Link>
 

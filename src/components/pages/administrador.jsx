@@ -1,8 +1,73 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import { Table, Button, Modal, Form } from "react-bootstrap";
+import TablaTurno from "../pages/turno/TablaTurno";
+import ModalTurno from "../pages/turno/ModalTurno";
+import ModalVerTurno from "../pages/turno/ModalVerTurno";
 
 const Administrador = ({ productosCreados, setProductosCreados }) => {
+  /* Para Turnos */
+
+  const [turnos, setTurnos] = useState([]);
+  const [showModalTurno, setShowModalTurno] = useState(false);
+  const [turnoEditar, setTurnoEditar] = useState(null);
+  const [indiceEditar, setIndiceEditar] = useState(null);
+  const [showVerModalTurno, setShowVerModalTurno] = useState(false);
+  const [turnoVer, setTurnoVer] = useState(null);
+
+  useEffect(() => {
+    const turnosGuardados = JSON.parse(localStorage.getItem("turnos")) || [];
+    setTurnos(turnosGuardados);
+  }, []);
+
+  const verTurno = (turno) => {
+    setTurnoVer(turno);
+    setShowVerModalTurno(true);
+  };
+
+  const editarTurno = (turno, indice) => {
+    setTurnoEditar(turno);
+    setIndiceEditar(indice);
+    setShowModalTurno(true);
+  };
+
+  const borrarTurno = (indice) => {
+    Swal.fire({
+      title: "¿Seguro quieres borrar este turno?",
+      text: "¡No podrás revertir esta acción!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Sí, borrar",
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const turnosGuardados = JSON.parse(localStorage.getItem("turnos")) || [];
+        turnosGuardados.splice(indice, 1);
+        localStorage.setItem("turnos", JSON.stringify(turnosGuardados));
+        setTurnos(turnosGuardados);
+
+        Swal.fire({
+          icon: "success",
+          title: "Turno borrado",
+          text: "El turno ha sido eliminado correctamente",
+          timer: 2000,
+          showConfirmButton: false,
+        });
+      }
+    });
+  };
+
+  const cerrarModalTurno = () => {
+    setShowModalTurno(false);
+    setTurnoEditar(null);
+    setIndiceEditar(null);
+    // Recargar turnos desde localStorage
+    const turnosGuardados = JSON.parse(localStorage.getItem("turnos")) || [];
+    setTurnos(turnosGuardados);
+  };
+
   const [showModal, setShowModal] = useState(false);
   const [nuevoProducto, setNuevoProducto] = useState({
     nombre: "",
@@ -25,6 +90,8 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
     setShowModal(true);
     setEditandoId(null);
   };
+
+  /* PRODUCTOS */
 
   /* ver producto */
   const [showVerModal, setShowVerModal] = useState(false);
@@ -208,6 +275,33 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
           )}
         </tbody>
       </Table>
+
+
+
+      {/* TURNOS */}
+      <div className="container py-4">
+        <TablaTurno
+          turnos={turnos}
+          onVer={verTurno}
+          onEditar={editarTurno}
+          onBorrar={borrarTurno}
+        />
+      </div>
+
+      {/* Modal Editar Turno */}
+      <ModalTurno
+        show={showModalTurno}
+        handleClose={cerrarModalTurno}
+        turnoEditar={turnoEditar}
+        indiceEditar={indiceEditar}
+      />
+
+      {/* Modal Ver Turno */}
+      <ModalVerTurno
+        show={showVerModalTurno}
+        handleClose={() => setShowVerModalTurno(false)}
+        turno={turnoVer}
+      />
 
       {/* Modal Crear Producto */}
       <Modal show={showModal} onHide={() => setShowModal(false)} centered>

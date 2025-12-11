@@ -326,7 +326,7 @@ const Inicio = ({ usuarioLogueado, setUsuarioLogueado }) => {
                 <Card.Img
                   src="/img/accesorios3.avif"
                   className="img-posicion"
-                  alt="mujer con ropa deportiva"
+                  alt="muchos accesorios juntos"
                 />
                 <Card.ImgOverlay>
                   <Card.Title>Accesorios Deportivos</Card.Title>
@@ -334,7 +334,7 @@ const Inicio = ({ usuarioLogueado, setUsuarioLogueado }) => {
                     Todo lo que necesitás para completar tu equipamiento.
                   </Card.Text>
                   <Link
-                    to="/productos/catalogoElla"
+                    to="/productos/catalogoAccesorio"
                     className="btn btn-outline-light boton-catalogo mx-auto"
                   >
                     Ver Catálogo
