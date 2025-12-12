@@ -11,6 +11,7 @@ const ModalVerTurno = ({ show, handleClose, turno }) => {
         {turno && (
           <div>
             <p><strong>Nombre:</strong> {turno.nombre}</p>
+            <p><strong>Teléfono:</strong> {turno.telefono}</p>
             <p><strong>Fecha:</strong> {turno.fecha}</p>
             <p><strong>Hora:</strong> {turno.hora} hs</p>
             <p><strong>Cancha:</strong> {turno.cancha}</p>

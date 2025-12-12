@@ -66,7 +66,7 @@ const CatalogoElla = ({ productosCreados }) => {
                 <p className="mb-3">
                   <strong>Talles disponibles:</strong> {producto.talles}
                 </p>
-                <button className="botonComprar rounded">Comprar</button>
+               
               </div>
             </div>
           </div>
