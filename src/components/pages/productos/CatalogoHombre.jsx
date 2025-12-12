@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Button } from "react-bootstrap";
 
 const CatalogoHombre = ({ productosCreados }) => {
   const productosOriginales = [
@@ -51,27 +52,27 @@ const CatalogoHombre = ({ productosCreados }) => {
                 />
               </div>
               <div className="card-body">
-                <h5 className="card-title fw-bold text-center">{producto.nombre}</h5>
+                <h5 className="card-title text-ambar fw-bold text-center">{producto.nombre}</h5>
                 <p className="card-text text-muted text-center">{producto.descripcion}</p>
                 <hr />
                 <p className="mb-2">
                   <strong>Precio:</strong>{" "}
-                  <span className="text-success fs-5">{producto.precio}</span>
+                  <span className="text-ambar fs-5">{producto.precio}</span>
                 </p>
                 <p className="mb-3">
                   <strong>Talles disponibles:</strong> {producto.talles}
                 </p>
-                <button className="botonComprar rounded">Comprar</button>
+                
               </div>
             </div>
           </div>
         ))}
       </div>
 
-      <div className="text-center mt-5">
-        <Link to="/" className="btn btn-outline-secondary botonComprar rounded">
-          ← Volver al Inicio
-        </Link>
+      <div className="d-flex justify-content-center my-4">
+        <Button as={Link} to="/" className="boton-volver-inicio">
+          <i className="bi bi-arrow-bar-left"> Volver al Inicio </i>
+        </Button>
       </div>
     </div>
   );
