@@ -102,7 +102,7 @@ function App() {
                   setProductosCreados={setProductosCreados}
                 />
               ) : (
-                <Navigate to="/" />
+                <Navigate to="/" replace />
               )
             }
           />
@@ -124,7 +124,24 @@ function App() {
             element={<CatalogoAccesorio productosCreados={productosCreados} />}
           />
           <Route path="/turno/formularioTurno" element={<FormularioTurno />} />
-          <Route path="/admin" element={<Administrador />} />
+           <Route
+            path="/admin"
+            element={
+              usuarioLogueado.isAdmin ? (
+                <Administrador
+                  productosCreados={productosCreados}
+                  setProductosCreados={setProductosCreados}
+                />
+              ) : (
+                <Navigate to="/" replace />
+              )
+            }
+          />
+
+
+
+
+
 
           <Route
             path="/"
