@@ -63,6 +63,7 @@ const CatalogoHombre = ({ productosCreados }) => {
                   <strong>Talles disponibles:</strong> {producto.talles}
                 </p>
                 
+               
               </div>
             </div>
           </div>

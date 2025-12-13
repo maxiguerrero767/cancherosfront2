@@ -67,6 +67,7 @@ const CatalogoNinios = ({ productosCreados }) => {
                 <p className="mb-3">
                   <strong>Talles disponibles:</strong> {producto.talles}
                 </p>
+                
               </div>
             </div>
           </div>

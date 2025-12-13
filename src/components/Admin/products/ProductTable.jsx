@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Table, Button } from "react-bootstrap";
 import Swal from "sweetalert2";
-import { getProducts, createProduct, updateProduct, deleteProduct } from "./services/product.service";
+import { getProducts, createProduct, updateProduct, deleteProduct } from "../products/services/product.service"; 
 import ProductModal from "./components/ProductModal";
-const IMAGE_URL = "http://localhost:4000";
+
 const ProductTable = () => {
   const [products, setProducts] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -95,7 +95,12 @@ const ProductTable = () => {
             {products.map((prod) => (
               <tr key={prod._id}>
                 <td style={{ width: "80px" }}>
-                  <img  src={prod.imageUrl ? `${IMAGE_URL}${prod.imageUrl}` : "https://via.placeholder.com/50"}  alt="img" className="rounded" style={{ width: "50px", height: "50px", objectFit: "cover" }} />
+                  <img  
+                    src={prod.imageUrl || "https://via.placeholder.com/50"}  
+                    alt="img" 
+                    className="rounded" 
+                    style={{ width: "50px", height: "50px", objectFit: "cover" }} 
+                  />
                 </td>
                 <td>
                   <strong>{prod.name}</strong>
