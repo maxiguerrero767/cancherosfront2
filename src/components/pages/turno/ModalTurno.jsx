@@ -8,6 +8,7 @@ const ModalTurno = ({ show, handleClose, turnoEditar, indiceEditar }) => {
 
   const [turno, setTurno] = useState({
     nombre: "",
+    telefono: "",
     fecha: "",
     hora: "",
     cancha: "",
@@ -24,6 +25,7 @@ const ModalTurno = ({ show, handleClose, turnoEditar, indiceEditar }) => {
       // Al cerrar el modal, limpiamos
       setTurno({
         nombre: "",
+        telefono: "",
         fecha: "",
         hora: "",
         cancha: "",
@@ -44,6 +46,11 @@ const ModalTurno = ({ show, handleClose, turnoEditar, indiceEditar }) => {
 
     if (!turno.nombre.trim())
       nuevosErrores.nombre = "Este campo es obligatorio";
+    if (!turno.telefono.trim()) {
+      nuevosErrores.telefono = "Este campo es obligatorio";
+    } else if (!/^\d+$/.test(turno.telefono.trim())) {
+      nuevosErrores.telefono = "El teléfono debe contener solo números";
+    }
     if (!turno.fecha) {
       nuevosErrores.fecha = "Debes seleccionar una fecha";
     } else if (new Date(turno.fecha) < new Date(hoy)) {
@@ -90,6 +97,7 @@ const ModalTurno = ({ show, handleClose, turnoEditar, indiceEditar }) => {
             <p><strong>Hora:</strong> ${turno.hora} hs</p>
             <p><strong>Cancha:</strong> ${turno.cancha}</p>
             <p><strong>Nombre reserva:</strong> ${turno.nombre}</p>
+            <p><strong>Teléfono:</strong> ${turno.telefono}</p>
             <p><strong>Estado:</strong> ${turno.estado}</p>
           </div>
         `,
@@ -125,6 +133,7 @@ const ModalTurno = ({ show, handleClose, turnoEditar, indiceEditar }) => {
             <p><strong>Hora:</strong> ${turno.hora} hs</p>
             <p><strong>Cancha:</strong> ${turno.cancha}</p>
             <p><strong>Nombre reserva:</strong> ${turno.nombre}</p>
+            <p><strong>Teléfono:</strong> ${turno.telefono}</p>
             <p><strong>Estado:</strong> ${turno.estado}</p>
           </div>
         `,
@@ -136,6 +145,7 @@ const ModalTurno = ({ show, handleClose, turnoEditar, indiceEditar }) => {
 
     setTurno({
       nombre: "",
+      telefono: "",
       fecha: "",
       hora: "",
       cancha: "",
@@ -165,6 +175,22 @@ const ModalTurno = ({ show, handleClose, turnoEditar, indiceEditar }) => {
             />
             {errores.nombre && (
               <div className="mensaje-error">{errores.nombre}</div>
+            )}
+          </Form.Group>
+
+          {/* Número de teléfono */}
+          <Form.Group className="mb-3">
+            <Form.Label>Número de teléfono</Form.Label>
+            <Form.Control
+              type="tel"
+              name="telefono"
+              placeholder="Ingresá tu número de teléfono"
+              value={turno.telefono}
+              onChange={handleChange}
+              className="sin-borde"
+            />
+            {errores.telefono && (
+              <div className="mensaje-error">{errores.telefono}</div>
             )}
           </Form.Group>
 
