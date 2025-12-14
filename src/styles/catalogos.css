@@ -17,3 +17,7 @@
   color: black; 
   border-color: white;
 }
+
+.texto-ambar{
+  color: var(--ambar);
+}

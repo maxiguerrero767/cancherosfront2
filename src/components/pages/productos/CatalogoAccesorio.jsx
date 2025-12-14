@@ -53,7 +53,7 @@ const CatalogoAccesorio = ({ productosCreados }) => {
                 />
               </div>
               <div className="card-body">
-                <h5 className="card-title fw-bold text-center">
+                <h5 className="card-title texto-ambar fw-bold text-center">
                   {producto.nombre}
                 </h5>
                 <p className="card-text text-muted text-center">
@@ -62,7 +62,7 @@ const CatalogoAccesorio = ({ productosCreados }) => {
                 <hr />
                 <p className="mb-2">
                   <strong>Precio:</strong>{" "}
-                  <span className="text-success fs-5">{producto.precio}</span>
+                  <span className="texto-ambar fs-5">{producto.precio}</span>
                 </p>
                 <p className="mb-3">
                   <strong>Talles disponibles:</strong> {producto.talles}
