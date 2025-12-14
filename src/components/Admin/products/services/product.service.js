@@ -1,29 +1,34 @@
-import axios from "axios";
-
 const BASE_URL = import.meta.env.VITE_API_URL;
-
 const API_URL = `${BASE_URL}/products`;
 
 export const getProducts = async () => {
-  const response = await axios.get(API_URL);
-  return response.data;
+  const res = await fetch(API_URL);
+  if (!res.ok) throw new Error("Error al obtener productos");
+  return res.json();
 };
 
 export const createProduct = async (formData) => {
-  const response = await axios.post(API_URL, formData, {
-    headers: { "Content-Type": "multipart/form-data" }
+  const res = await fetch(API_URL, {
+    method: "POST",
+    body: formData,
   });
-  return response.data;
+  if (!res.ok) throw new Error("Error al crear producto");
+  return res.json();
 };
 
 export const updateProduct = async (id, formData) => {
-  const response = await axios.put(`${API_URL}/${id}`, formData, {
-    headers: { "Content-Type": "multipart/form-data" }
+  const res = await fetch(`${API_URL}/${id}`, {
+    method: "PUT",
+    body: formData,
   });
-  return response.data;
+  if (!res.ok) throw new Error("Error al actualizar producto");
+  return res.json();
 };
 
 export const deleteProduct = async (id) => {
-  const response = await axios.delete(`${API_URL}/${id}`);
-  return response.data;
+  const res = await fetch(`${API_URL}/${id}`, {
+    method: "DELETE",
+  });
+  if (!res.ok) throw new Error("Error al eliminar producto");
+  return res.json();
 };
