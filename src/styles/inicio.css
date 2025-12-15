@@ -183,6 +183,17 @@
   box-shadow: 1px 1px 10px var(--ambar);
 }
 
+.btn-verde{
+  background-color: var(--verdeExito);
+  border-color: var(--verdeExito);
+}
+
+.btn-verde:hover{
+  background-color: var(--verdeNeon);
+  border-color: var(--verdeNeon);
+  color: var(--azulPetroleo);
+}
+
 /*MEDIA QUERIES */
 
 /* MÓVIL */

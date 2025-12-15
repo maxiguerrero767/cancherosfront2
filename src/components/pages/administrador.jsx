@@ -93,6 +93,11 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
 
   /* PRODUCTOS */
 
+  /* Sin imagen */
+  const imagenPorDefecto =
+  "https://images.pexels.com/photos/28216688/pexels-photo-28216688.png?_gl=1*mmuo1c*_ga*OTI5MTUwOTU1LjE3NDY5MTY0MDM.*_ga_8JE65Q40S6*czE3NjU3NTY4MzMkbzMyJGcxJHQxNzY1NzU3NDg4JGo1OSRsMCRoMA..";
+
+
   /* ver producto */
   const [showVerModal, setShowVerModal] = useState(false);
   const [productoVer, setProductoVer] = useState(null);
@@ -114,7 +119,7 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
   };
 
   const guardarProducto = () => {
-    const productoConId = { ...nuevoProducto };
+    const productoConId = { ...nuevoProducto, imagen: nuevoProducto.imagen && nuevoProducto.imagen.trim() !== ""? nuevoProducto.imagen : imagenPorDefecto };
 
     if (editandoId) {
       // Editando: reemplazamos el producto existente
@@ -201,7 +206,7 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
     <div className="container my-5">
       <div className="d-flex justify-content-between align-items-center mb-4">
         <h2 className="text-center flex-grow-1">Administrador de Productos</h2>
-        <Button variant="success" onClick={abrirCrearProducto}>
+        <Button className="btn-verde" onClick={abrirCrearProducto}>
           + Crear
         </Button>
       </div>
