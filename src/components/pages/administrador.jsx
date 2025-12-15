@@ -4,40 +4,58 @@ import { Table, Button, Modal, Form } from "react-bootstrap";
 import TablaTurno from "../pages/turno/TablaTurno";
 import ModalTurno from "../pages/turno/ModalTurno";
 import ModalVerTurno from "../pages/turno/ModalVerTurno";
-import { 
-  obtenerProducto, 
-  crearProducto, 
-  editarProducto as editarProductoService, 
-  borrarProductoService 
+import {
+  obtenerProducto,
+  crearProducto,
+  editarProducto as editarProductoService,
+  borrarProductoService,
 } from "../../helpers/queries";
 const Administrador = ({ productosCreados, setProductosCreados }) => {
   /* Para Turnos */
 
   const [turnos, setTurnos] = useState([]);
-  const [showModalTurno, setShowModalTurno] = useState(false);
+
   const [turnoEditar, setTurnoEditar] = useState(null);
   const [indiceEditar, setIndiceEditar] = useState(null);
+  const [showModalTurno, setShowModalTurno] = useState(false);
   const [showVerModalTurno, setShowVerModalTurno] = useState(false);
   const [turnoVer, setTurnoVer] = useState(null);
 
+  // Cargar turnos desde el backend
+  const cargarTurnos = async () => {
+    try {
+      const res = await fetch("http://localhost:3001/api/reservas");
+      if (!res.ok) throw new Error("Error al cargar turnos");
+      const data = await res.json();
+      setTurnos(data);
+    } catch (error) {
+      console.error("Error al cargar turnos:", error);
+      setTurnos([]);
+    }
+  };
+
   useEffect(() => {
-    const turnosGuardados = JSON.parse(localStorage.getItem("turnos")) || [];
-    setTurnos(turnosGuardados);
+    cargarTurnos();
   }, []);
 
+  // Ver turno
   const verTurno = (turno) => {
     setTurnoVer(turno);
     setShowVerModalTurno(true);
   };
 
-  const editarTurno = (turno, indice) => {
+  // Editar
+  const editarTurno = (turno) => {
     setTurnoEditar(turno);
-    setIndiceEditar(indice);
     setShowModalTurno(true);
   };
 
-  const borrarTurno = (indice) => {
-    Swal.fire({
+  // Borrar desde backend
+  const borrarTurno = async (indice) => {
+    const turno = turnos[indice];
+    if (!turno || !turno._id) return;
+
+    const result = await Swal.fire({
       title: "¿Seguro quieres borrar este turno?",
       text: "¡No podrás revertir esta acción!",
       icon: "warning",
@@ -46,12 +64,18 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
       cancelButtonColor: "#3085d6",
       confirmButtonText: "Sí, borrar",
       cancelButtonText: "Cancelar",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        const turnosGuardados = JSON.parse(localStorage.getItem("turnos")) || [];
-        turnosGuardados.splice(indice, 1);
-        localStorage.setItem("turnos", JSON.stringify(turnosGuardados));
-        setTurnos(turnosGuardados);
+    });
+
+    if (result.isConfirmed) {
+      try {
+        const res = await fetch(
+          `http://localhost:3001/api/reservas/${turno._id}`,
+          {
+            method: "DELETE",
+          }
+        );
+
+        if (!res.ok) throw new Error("Error al eliminar");
 
         Swal.fire({
           icon: "success",
@@ -60,22 +84,24 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
           timer: 2000,
           showConfirmButton: false,
         });
+
+        cargarTurnos(); // Recargar la lista
+      } catch (error) {
+        Swal.fire("Error", "No se pudo eliminar el turno", "error");
       }
-    });
+    }
   };
 
+  // Cerrar modal: recargar turnos
   const cerrarModalTurno = () => {
     setShowModalTurno(false);
     setTurnoEditar(null);
-    setIndiceEditar(null);
-    // Recargar turnos desde localStorage
-    const turnosGuardados = JSON.parse(localStorage.getItem("turnos")) || [];
-    setTurnos(turnosGuardados);
+    cargarTurnos();
   };
   const [productosAPI, setProductosAPI] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [archivoImagen, setArchivoImagen] = useState(null); 
-   const [nuevoProducto, setNuevoProducto] = useState({
+  const [archivoImagen, setArchivoImagen] = useState(null);
+  const [nuevoProducto, setNuevoProducto] = useState({
     nombre: "",
     precio: "",
     descripcion: "",
@@ -83,7 +109,7 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
     categoria: "ellas",
   });
   const [editandoId, setEditandoId] = useState(null);
-   const cargarProductos = async () => {
+  const cargarProductos = async () => {
     try {
       const data = await obtenerProducto();
       setProductosAPI(data);
@@ -104,12 +130,11 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
       talles: "",
       categoria: "ellas",
     });
-   setArchivoImagen(null);
+    setArchivoImagen(null);
     setShowModal(true);
     setEditandoId(null);
   };
 
-  
   /* ver producto */
   const [showVerModal, setShowVerModal] = useState(false);
   const [productoVer, setProductoVer] = useState(null);
@@ -120,10 +145,11 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
     setShowVerModal(true);
   };
 
-
   // Función para abrir el modal con los datos del producto a editar
-   const editarProducto = (producto) => {
-    const tallesString = Array.isArray(producto.talles) ? producto.talles.join(", ") : producto.talles;
+  const editarProducto = (producto) => {
+    const tallesString = Array.isArray(producto.talles)
+      ? producto.talles.join(", ")
+      : producto.talles;
 
     setNuevoProducto({
       nombre: producto.nombre,
@@ -133,7 +159,7 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
       categoria: producto.categoria,
     });
     setArchivoImagen(null);
-    setEditandoId(producto._id); 
+    setEditandoId(producto._id);
     setShowModal(true);
   };
 
@@ -142,17 +168,20 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
       const formData = new FormData();
       formData.append("nombre", nuevoProducto.nombre);
       formData.append("descripcion", nuevoProducto.descripcion);
-      formData.append("precio", nuevoProducto.precio.toString().replace("$", ""));
+      formData.append(
+        "precio",
+        nuevoProducto.precio.toString().replace("$", "")
+      );
       formData.append("talles", nuevoProducto.talles);
       formData.append("categoria", nuevoProducto.categoria);
-      
+
       if (archivoImagen) {
         formData.append("imagen", archivoImagen);
       }
 
       if (editandoId) {
         await editarProductoService(editandoId, formData);
-        
+
         Swal.fire({
           icon: "success",
           title: "Producto editado",
@@ -174,7 +203,6 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
 
       cargarProductos();
       setShowModal(false);
-
     } catch (error) {
       console.error(error);
       Swal.fire({
@@ -185,7 +213,7 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
     }
   };
 
-   const borrarProducto = (id) => {
+  const borrarProducto = (id) => {
     Swal.fire({
       title: "¿Seguro quieres borrar?",
       text: "Se eliminará de la base de datos y la nube",
@@ -197,8 +225,8 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
       if (result.isConfirmed) {
         try {
           await borrarProductoService(id);
-          cargarProductos(); 
-          
+          cargarProductos();
+
           Swal.fire({
             icon: "success",
             title: "Producto borrado",
@@ -222,7 +250,7 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
       </div>
 
       <Table striped bordered hover responsive>
-         <thead>
+        <thead>
           <tr className="text-center">
             <th>Nombre</th>
             <th>Precio</th>
@@ -247,8 +275,8 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
                 <td>${producto.precio}</td>
                 <td>{producto.descripcion}</td>
                 <td>
-                  {Array.isArray(producto.talles) 
-                    ? producto.talles.join(", ") 
+                  {Array.isArray(producto.talles)
+                    ? producto.talles.join(", ")
                     : producto.talles}
                 </td>
                 <td>
@@ -262,9 +290,29 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
                 </td>
                 <td>{producto.categoria}</td>
                 <td>
-                  <Button variant="info" size="sm" className="me-1" onClick={() => verProducto(producto)}>Ver</Button>
-                  <Button variant="warning" size="sm" className="me-1" onClick={() => editarProducto(producto)}>Editar</Button>
-                  <Button variant="danger" size="sm" onClick={() => borrarProducto(producto._id)}>Borrar</Button>
+                  <Button
+                    variant="info"
+                    size="sm"
+                    className="me-1"
+                    onClick={() => verProducto(producto)}
+                  >
+                    Ver
+                  </Button>
+                  <Button
+                    variant="warning"
+                    size="sm"
+                    className="me-1"
+                    onClick={() => editarProducto(producto)}
+                  >
+                    Editar
+                  </Button>
+                  <Button
+                    variant="danger"
+                    size="sm"
+                    onClick={() => borrarProducto(producto._id)}
+                  >
+                    Borrar
+                  </Button>
                 </td>
               </tr>
             ))
@@ -272,14 +320,18 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
         </tbody>
       </Table>
 
-
-
       {/* TURNOS */}
       <div className="container py-4">
+        <div className="d-flex justify-content-between align-items-center mb-4">
+          <h2 className="text-center flex-grow-1">Administrador de Turnos</h2>
+          <Button variant="success" onClick={() => setShowModalTurno(true)}>
+            + Crear Turno
+          </Button>
+        </div>
         <TablaTurno
           turnos={turnos}
           onVer={verTurno}
-          onEditar={editarTurno}
+          onEditar={(turno) => editarTurno(turno)}
           onBorrar={borrarTurno}
         />
       </div>
@@ -368,31 +420,37 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
               </Form.Select>
             </Form.Group>
 
-              <Form.Group className="mb-2">
+            <Form.Group className="mb-2">
               <Form.Label>Imagen</Form.Label>
               <div className="d-flex align-items-center gap-2">
                 <Form.Control
                   type="file"
                   accept="image/*"
-                  id="carga-imagen" 
+                  id="carga-imagen"
                   className="d-none"
                   onChange={(e) => setArchivoImagen(e.target.files[0])}
                 />
-                
-                <Form.Label 
-                  htmlFor="carga-imagen" 
-                  className="btn btn-secondary mb-0" 
+
+                <Form.Label
+                  htmlFor="carga-imagen"
+                  className="btn btn-secondary mb-0"
                   style={{ cursor: "pointer" }}
                 >
                   Seleccionar archivo
                 </Form.Label>
 
                 <span className="text-muted fst-italic">
-                  {archivoImagen ? archivoImagen.name : "Ningún archivo seleccionado"}
+                  {archivoImagen
+                    ? archivoImagen.name
+                    : "Ningún archivo seleccionado"}
                 </span>
               </div>
 
-              {editandoId && <Form.Text className="text-muted d-block mt-1">Deja vacío para mantener la imagen actual.</Form.Text>}
+              {editandoId && (
+                <Form.Text className="text-muted d-block mt-1">
+                  Deja vacío para mantener la imagen actual.
+                </Form.Text>
+              )}
             </Form.Group>
 
             <Form.Group className="mb-2">
