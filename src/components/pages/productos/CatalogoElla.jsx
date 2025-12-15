@@ -74,7 +74,7 @@ const CatalogoElla = ({ productosCreados }) => {
       </div>
 
       <div className="text-center mt-5">
-        <Link to="/" className="btn btn-outline-secondary botonComprar rounded">
+        <Link to="/" className="btn boton-volver-inicio">
           ← Volver al Inicio
         </Link>
       </div>
