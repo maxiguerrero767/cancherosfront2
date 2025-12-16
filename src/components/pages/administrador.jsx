@@ -4,11 +4,12 @@ import { Table, Button, Modal, Form } from "react-bootstrap";
 import TablaTurno from "../pages/turno/TablaTurno";
 import ModalTurno from "../pages/turno/ModalTurno";
 import ModalVerTurno from "../pages/turno/ModalVerTurno";
-import { 
-  obtenerProducto, 
-  crearProducto, 
-  editarProducto as editarProductoService, 
-  borrarProductoService 
+import TablaUsuarios from "../admin/users/TablaUsuarios";
+import {
+  obtenerProducto,
+  crearProducto,
+  editarProducto as editarProductoService,
+  borrarProductoService,
 } from "../../helpers/queries";
 const Administrador = ({ productosCreados, setProductosCreados }) => {
   /* Para Turnos */
@@ -48,7 +49,8 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
       cancelButtonText: "Cancelar",
     }).then((result) => {
       if (result.isConfirmed) {
-        const turnosGuardados = JSON.parse(localStorage.getItem("turnos")) || [];
+        const turnosGuardados =
+          JSON.parse(localStorage.getItem("turnos")) || [];
         turnosGuardados.splice(indice, 1);
         localStorage.setItem("turnos", JSON.stringify(turnosGuardados));
         setTurnos(turnosGuardados);
@@ -74,16 +76,17 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
   };
   const [productosAPI, setProductosAPI] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [archivoImagen, setArchivoImagen] = useState(null); 
-   const [nuevoProducto, setNuevoProducto] = useState({
+  const [archivoImagen, setArchivoImagen] = useState(null);
+  const [nuevoProducto, setNuevoProducto] = useState({
     nombre: "",
     precio: "",
     descripcion: "",
     talles: "",
     categoria: "ellas",
   });
+   const [errors, setErrors] = useState({});
   const [editandoId, setEditandoId] = useState(null);
-   const cargarProductos = async () => {
+  const cargarProductos = async () => {
     try {
       const data = await obtenerProducto();
       setProductosAPI(data);
@@ -104,12 +107,11 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
       talles: "",
       categoria: "ellas",
     });
-   setArchivoImagen(null);
+    setArchivoImagen(null);
     setShowModal(true);
     setEditandoId(null);
   };
 
-  
   /* ver producto */
   const [showVerModal, setShowVerModal] = useState(false);
   const [productoVer, setProductoVer] = useState(null);
@@ -120,10 +122,11 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
     setShowVerModal(true);
   };
 
-
   // Función para abrir el modal con los datos del producto a editar
-   const editarProducto = (producto) => {
-    const tallesString = Array.isArray(producto.talles) ? producto.talles.join(", ") : producto.talles;
+  const editarProducto = (producto) => {
+    const tallesString = Array.isArray(producto.talles)
+      ? producto.talles.join(", ")
+      : producto.talles;
 
     setNuevoProducto({
       nombre: producto.nombre,
@@ -133,26 +136,71 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
       categoria: producto.categoria,
     });
     setArchivoImagen(null);
-    setEditandoId(producto._id); 
+    setEditandoId(producto._id);
     setShowModal(true);
   };
 
+  const validarFormulario = () => {
+    const nuevosErrores = {};
+
+    // Validar Nombre
+    if (!nuevoProducto.nombre.trim()) {
+      nuevosErrores.nombre = "El nombre es obligatorio.";
+    } else if (nuevoProducto.nombre.length < 3) {
+      nuevosErrores.nombre = "El nombre debe tener al menos 3 caracteres.";
+    }
+
+    // Validar Precio
+    if (!nuevoProducto.precio) {
+      nuevosErrores.precio = "El precio es obligatorio.";
+    } else if (
+     
+      (nuevoProducto.precio) < 0
+    ) {
+      nuevosErrores.precio = "El precio debe ser un número positivo.";
+    }
+
+    // Validar Descripción
+    if (!nuevoProducto.descripcion.trim()) {
+      nuevosErrores.descripcion = "La descripción es obligatoria.";
+    }
+
+    // Validar Talles
+    if (!nuevoProducto.talles.trim()) {
+      nuevosErrores.talles = "Debes ingresar al menos un talle.";
+    }
+
+    // Validar Categoría
+    if (!nuevoProducto.categoria) {
+      nuevosErrores.categoria = "Selecciona una categoría.";
+    }
+
+    setErrors(nuevosErrores);
+    return Object.keys(nuevosErrores).length === 0;
+  };
+
   const guardarProducto = async () => {
+    if (!validarFormulario()) {
+      return;
+    }
     try {
       const formData = new FormData();
       formData.append("nombre", nuevoProducto.nombre);
       formData.append("descripcion", nuevoProducto.descripcion);
-      formData.append("precio", nuevoProducto.precio.toString().replace("$", ""));
+      formData.append(
+        "precio",
+        nuevoProducto.precio.toString().replace("$", "")
+      );
       formData.append("talles", nuevoProducto.talles);
       formData.append("categoria", nuevoProducto.categoria);
-      
+
       if (archivoImagen) {
         formData.append("imagen", archivoImagen);
       }
 
       if (editandoId) {
         await editarProductoService(editandoId, formData);
-        
+
         Swal.fire({
           icon: "success",
           title: "Producto editado",
@@ -174,7 +222,6 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
 
       cargarProductos();
       setShowModal(false);
-
     } catch (error) {
       console.error(error);
       Swal.fire({
@@ -185,7 +232,7 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
     }
   };
 
-   const borrarProducto = (id) => {
+  const borrarProducto = (id) => {
     Swal.fire({
       title: "¿Seguro quieres borrar?",
       text: "Se eliminará de la base de datos y la nube",
@@ -197,8 +244,8 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
       if (result.isConfirmed) {
         try {
           await borrarProductoService(id);
-          cargarProductos(); 
-          
+          cargarProductos();
+
           Swal.fire({
             icon: "success",
             title: "Producto borrado",
@@ -222,7 +269,7 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
       </div>
 
       <Table striped bordered hover responsive>
-         <thead>
+        <thead>
           <tr className="text-center">
             <th>Nombre</th>
             <th>Precio</th>
@@ -247,8 +294,8 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
                 <td>${producto.precio}</td>
                 <td>{producto.descripcion}</td>
                 <td>
-                  {Array.isArray(producto.talles) 
-                    ? producto.talles.join(", ") 
+                  {Array.isArray(producto.talles)
+                    ? producto.talles.join(", ")
                     : producto.talles}
                 </td>
                 <td>
@@ -262,17 +309,35 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
                 </td>
                 <td>{producto.categoria}</td>
                 <td>
-                  <Button variant="info" size="sm" className="me-1" onClick={() => verProducto(producto)}>Ver</Button>
-                  <Button variant="warning" size="sm" className="me-1" onClick={() => editarProducto(producto)}>Editar</Button>
-                  <Button variant="danger" size="sm" onClick={() => borrarProducto(producto._id)}>Borrar</Button>
+                  <Button
+                    variant="info"
+                    size="sm"
+                    className="me-1"
+                    onClick={() => verProducto(producto)}
+                  >
+                    Ver
+                  </Button>
+                  <Button
+                    variant="warning"
+                    size="sm"
+                    className="me-1"
+                    onClick={() => editarProducto(producto)}
+                  >
+                    Editar
+                  </Button>
+                  <Button
+                    variant="danger"
+                    size="sm"
+                    onClick={() => borrarProducto(producto._id)}
+                  >
+                    Borrar
+                  </Button>
                 </td>
               </tr>
             ))
           )}
         </tbody>
       </Table>
-
-
 
       {/* TURNOS */}
       <div className="container py-4">
@@ -283,7 +348,10 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
           onBorrar={borrarTurno}
         />
       </div>
-
+      
+      <div className="mb-5">
+        <TablaUsuarios />
+      </div>
       {/* Modal Editar Turno */}
       <ModalTurno
         show={showModalTurno}
@@ -316,7 +384,11 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
                 onChange={(e) =>
                   setNuevoProducto({ ...nuevoProducto, nombre: e.target.value })
                 }
+                isInvalid={!!errors.nombre}
               />
+              <Form.Control.Feedback type="invalid">
+                {errors.nombre}
+              </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group className="mb-2">
@@ -327,14 +399,17 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
                 onChange={(e) => {
                   let valor = e.target.value;
 
-                  // Si el usuario borra todo, dejamos $
                   if (!valor.includes("$")) {
                     valor = "$" + valor.replace(/\$/g, "");
                   }
 
                   setNuevoProducto({ ...nuevoProducto, precio: valor });
                 }}
+                isInvalid={!!errors.precio}
               />
+              <Form.Control.Feedback type="invalid">
+                {errors.precio}
+              </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group className="mb-2">
@@ -348,7 +423,11 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
                     descripcion: e.target.value,
                   })
                 }
+                isInvalid={!!errors.descripcion}
               />
+              <Form.Control.Feedback type="invalid">
+                {errors.descripcion}
+              </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group className="mb-2">
@@ -358,6 +437,7 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
                 onChange={(e) =>
                   setNuevoProducto({ ...nuevoProducto, talles: e.target.value })
                 }
+                 isInvalid={!!errors.talles}
               >
                 <option value="--">--</option>
                 <option value="XS">XS</option>
@@ -366,33 +446,40 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
                 <option value="L">L</option>
                 <option value="XL">XL</option>
               </Form.Select>
+               <Form.Control.Feedback type="invalid">{errors.talles}</Form.Control.Feedback>
             </Form.Group>
 
-              <Form.Group className="mb-2">
+            <Form.Group className="mb-2">
               <Form.Label>Imagen</Form.Label>
               <div className="d-flex align-items-center gap-2">
                 <Form.Control
                   type="file"
                   accept="image/*"
-                  id="carga-imagen" 
+                  id="carga-imagen"
                   className="d-none"
                   onChange={(e) => setArchivoImagen(e.target.files[0])}
                 />
-                
-                <Form.Label 
-                  htmlFor="carga-imagen" 
-                  className="btn btn-secondary mb-0" 
+
+                <Form.Label
+                  htmlFor="carga-imagen"
+                  className="btn btn-secondary mb-0"
                   style={{ cursor: "pointer" }}
                 >
                   Seleccionar archivo
                 </Form.Label>
 
                 <span className="text-muted fst-italic">
-                  {archivoImagen ? archivoImagen.name : "Ningún archivo seleccionado"}
+                  {archivoImagen
+                    ? archivoImagen.name
+                    : "Ningún archivo seleccionado"}
                 </span>
               </div>
 
-              {editandoId && <Form.Text className="text-muted d-block mt-1">Deja vacío para mantener la imagen actual.</Form.Text>}
+              {editandoId && (
+                <Form.Text className="text-muted d-block mt-1">
+                  Deja vacío para mantener la imagen actual.
+                </Form.Text>
+              )}
             </Form.Group>
 
             <Form.Group className="mb-2">
@@ -405,12 +492,14 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
                     categoria: e.target.value,
                   })
                 }
+                 isInvalid={!!errors.categoria}
               >
                 <option value="ellas">Ellas</option>
                 <option value="hombre">Hombre</option>
                 <option value="niños">Niños</option>
                 <option value="accesorios">Accesorios</option>
               </Form.Select>
+               <Form.Control.Feedback type="invalid">{errors.categoria}</Form.Control.Feedback>
             </Form.Group>
 
             <Button
