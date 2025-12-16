@@ -12,24 +12,29 @@ const ModalTurno = ({ show, handleClose, turnoEditar, indiceEditar }) => {
     fecha: "",
     hora: "",
     cancha: "",
-    estado: "Reservado",
+    estado: "pendiente",
   });
 
   const [errores, setErrores] = useState({});
 
   useEffect(() => {
     if (show && turnoEditar) {
-      // Si estamos editando, cargamos los datos del turno
-      setTurno(turnoEditar);
+      setTurno({
+        nombre: turnoEditar.usuario || "",
+        telefono: turnoEditar.telefono || "",
+        fecha: turnoEditar.fecha || "",
+        hora: turnoEditar.horario || "",
+        cancha: turnoEditar.cancha || "",
+        estado: turnoEditar.estado || "",
+      });
     } else if (!show) {
-      // Al cerrar el modal, limpiamos
       setTurno({
         nombre: "",
         telefono: "",
         fecha: "",
         hora: "",
         cancha: "",
-        estado: "Reservado",
+        estado: "pendiente",
       });
       setErrores({});
     }
@@ -63,102 +68,97 @@ const ModalTurno = ({ show, handleClose, turnoEditar, indiceEditar }) => {
     return Object.keys(nuevosErrores).length === 0;
   };
 
-  const guardarTurno = () => {
+  const guardarTurno = async () => {
     if (!validar()) return;
 
-    // Obtener turnos del LocalStorage
-    const turnosGuardados = JSON.parse(localStorage.getItem("turnos")) || [];
+    try {
+      const payload = {
+        usuario: turno.nombre.trim(),
+        telefono: turno.telefono.trim(),
+        cancha: turno.cancha,
+        fecha: turno.fecha,
+        horario: turno.hora,
+        estado: turno.estado,
+      };
 
-    if (indiceEditar !== null && indiceEditar !== undefined) {
-      // Verificar si ya existe otro turno con la misma fecha, hora y cancha (excluyendo el actual)
-      const turnoExistente = turnosGuardados.find(
-        (t, index) => index !== indiceEditar && t.fecha === turno.fecha && t.hora === turno.hora && t.cancha === turno.cancha
-      );
-
-      if (turnoExistente) {
-        Swal.fire({
-          title: "Turno ocupado",
-          text: "Ya existe un turno reservado para esta fecha, hora y cancha",
-          icon: "error",
-          confirmButtonText: "Aceptar",
+      if (turnoEditar) {
+        const id = turnoEditar._id;
+        const res = await fetch(`http://localhost:3001/api/reservas/${id}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
         });
-        return;
-      }
 
-      // Actualizamos el turno existente
-      turnosGuardados[indiceEditar] = turno;
-      localStorage.setItem("turnos", JSON.stringify(turnosGuardados));
+        if (!res.ok) {
+          const errorData = await res.json();
+          throw new Error(errorData.message || "Error al actualizar");
+        }
 
-      Swal.fire({
-        title: "Turno modificado con éxito",
-        html: `
+        Swal.fire({
+          title: "Turno modificado con éxito",
+          html: `
           <div class="swal-turno">
-            <p><strong>Fecha:</strong> ${turno.fecha}</p>
-            <p><strong>Hora:</strong> ${turno.hora} hs</p>
-            <p><strong>Cancha:</strong> ${turno.cancha}</p>
-            <p><strong>Nombre reserva:</strong> ${turno.nombre}</p>
-            <p><strong>Teléfono:</strong> ${turno.telefono}</p>
-            <p><strong>Estado:</strong> ${turno.estado}</p>
+            <p><strong>Fecha:</strong> ${payload.fecha}</p>
+            <p><strong>Hora:</strong> ${payload.horario}</p>
+            <p><strong>Cancha:</strong> ${payload.cancha}</p>
+            <p><strong>Nombre reserva:</strong> ${payload.usuario}</p>
+            <p><strong>Teléfono:</strong> ${payload.telefono}</p>
+            <p><strong>Estado:</strong> ${
+              payload.estado === "pendiente" ? "pendiente" : "Confirmado"
+            }</p>
           </div>
         `,
-        icon: "success",
-        confirmButtonText: "Aceptar",
-        confirmButtonColor: "#198754",
-      });
-    } else {
-      // Verificar si ya existe un turno con la misma fecha, hora y cancha
-      const turnoExistente = turnosGuardados.find(
-        (t) => t.fecha === turno.fecha && t.hora === turno.hora && t.cancha === turno.cancha
-      );
-
-      if (turnoExistente) {
-        Swal.fire({
-          title: "Turno ocupado",
-          text: "Ya existe un turno reservado para esta fecha, hora y cancha",
-          icon: "error",
+          icon: "success",
           confirmButtonText: "Aceptar",
+          confirmButtonColor: "#198754",
         });
-        return;
-      }
+      } else {
+        const res = await fetch("http://localhost:3001/api/reservas", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
 
-      // Creamos un nuevo turno
-      const nuevosTurnos = [...turnosGuardados, turno];
-      localStorage.setItem("turnos", JSON.stringify(nuevosTurnos));
+        if (!res.ok) {
+          const errorData = await res.json();
+          throw new Error(errorData.message || "Error al crear la reserva");
+        }
 
-      Swal.fire({
-        title: "Turno reservado con éxito",
-        html: `
+        Swal.fire({
+          title: "Turno reservado con éxito",
+          html: `
           <div class="swal-turno">
-            <p><strong>Fecha:</strong> ${turno.fecha}</p>
-            <p><strong>Hora:</strong> ${turno.hora} hs</p>
-            <p><strong>Cancha:</strong> ${turno.cancha}</p>
-            <p><strong>Nombre reserva:</strong> ${turno.nombre}</p>
-            <p><strong>Teléfono:</strong> ${turno.telefono}</p>
-            <p><strong>Estado:</strong> ${turno.estado}</p>
+            <p><strong>Fecha:</strong> ${payload.fecha}</p>
+            <p><strong>Hora:</strong> ${payload.horario}</p>
+            <p><strong>Cancha:</strong> ${payload.cancha}</p>
+            <p><strong>Nombre reserva:</strong> ${payload.usuario}</p>
+            <p><strong>Teléfono:</strong> ${payload.telefono}</p>
+            <p><strong>Estado:</strong> ${payload.estado}</p>
           </div>
         `,
-        icon: "success",
+          icon: "success",
+          confirmButtonText: "Aceptar",
+          confirmButtonColor: "#198754",
+        });
+      }
+
+      handleClose();
+    } catch (error) {
+      Swal.fire({
+        title: "Error",
+        text: error.message || "Hubo un problema al guardar el turno",
+        icon: "error",
         confirmButtonText: "Aceptar",
-        confirmButtonColor: "#198754",
       });
     }
-
-    setTurno({
-      nombre: "",
-      telefono: "",
-      fecha: "",
-      hora: "",
-      cancha: "",
-      estado: "Reservado",
-    });
-    setErrores({});
-    handleClose();
   };
 
   return (
     <Modal show={show} onHide={handleClose} centered>
       <Modal.Header closeButton>
-        <Modal.Title>{turnoEditar ? "Modificar Turno" : "Reservar Turno"}</Modal.Title>
+        <Modal.Title>
+          {turnoEditar ? "Modificar Turno" : "Reservar Turno"}
+        </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
@@ -221,22 +221,22 @@ const ModalTurno = ({ show, handleClose, turnoEditar, indiceEditar }) => {
             >
               <option value="">Seleccioná un horario</option>
               <optgroup label="Mañana">
-                <option value="10">10:00</option>
-                <option value="11">11:00</option>
-                <option value="12">12:00</option>
-                <option value="13">13:00</option>
+                <option value="10:00">10:00</option>
+                <option value="11:00">11:00</option>
+                <option value="12:00">12:00</option>
+                <option value="13:00">13:00</option>
               </optgroup>
               <optgroup label="Tarde">
-                <option value="15">15:00</option>
-                <option value="16">16:00</option>
-                <option value="17">17:00</option>
-                <option value="18">18:00</option>
-                <option value="19">19:00</option>
-                <option value="20">20:00</option>
-                <option value="21">21:00</option>
-                <option value="22">22:00</option>
-                <option value="23">23:00</option>
-                <option value="24">24:00</option>
+                <option value="15:00">15:00</option>
+                <option value="16:00">16:00</option>
+                <option value="17:00">17:00</option>
+                <option value="18:00">18:00</option>
+                <option value="19:00">19:00</option>
+                <option value="20:00">20:00</option>
+                <option value="21:00">21:00</option>
+                <option value="22:00">22:00</option>
+                <option value="23:00">23:00</option>
+                <option value="00:00">00:00</option>
               </optgroup>
             </Form.Select>
             {errores.hora && (
@@ -272,13 +272,8 @@ const ModalTurno = ({ show, handleClose, turnoEditar, indiceEditar }) => {
               className="sin-borde"
               disabled={!turnoEditar}
             >
-              <option value="Reservado">Reservado</option>
-              {turnoEditar && (
-                <>
-                  <option value="Confirmado">Confirmado</option>
-                  <option value="Anulado">Anulado</option>
-                </>
-              )}
+              <option value="pendiente">Pendiente</option>
+              {turnoEditar && <option value="confirmado">Confirmado</option>}
             </Form.Select>
           </Form.Group>
         </Form>

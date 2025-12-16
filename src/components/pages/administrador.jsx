@@ -15,30 +15,48 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
   /* Para Turnos */
 
   const [turnos, setTurnos] = useState([]);
-  const [showModalTurno, setShowModalTurno] = useState(false);
+
   const [turnoEditar, setTurnoEditar] = useState(null);
   const [indiceEditar, setIndiceEditar] = useState(null);
+  const [showModalTurno, setShowModalTurno] = useState(false);
   const [showVerModalTurno, setShowVerModalTurno] = useState(false);
   const [turnoVer, setTurnoVer] = useState(null);
 
+  // Cargar turnos desde el backend
+  const cargarTurnos = async () => {
+    try {
+      const res = await fetch("http://localhost:3001/api/reservas");
+      if (!res.ok) throw new Error("Error al cargar turnos");
+      const data = await res.json();
+      setTurnos(data);
+    } catch (error) {
+      console.error("Error al cargar turnos:", error);
+      setTurnos([]);
+    }
+  };
+
   useEffect(() => {
-    const turnosGuardados = JSON.parse(localStorage.getItem("turnos")) || [];
-    setTurnos(turnosGuardados);
+    cargarTurnos();
   }, []);
 
+  // Ver turno
   const verTurno = (turno) => {
     setTurnoVer(turno);
     setShowVerModalTurno(true);
   };
 
-  const editarTurno = (turno, indice) => {
+  // Editar
+  const editarTurno = (turno) => {
     setTurnoEditar(turno);
-    setIndiceEditar(indice);
     setShowModalTurno(true);
   };
 
-  const borrarTurno = (indice) => {
-    Swal.fire({
+  // Borrar desde backend
+  const borrarTurno = async (indice) => {
+    const turno = turnos[indice];
+    if (!turno || !turno._id) return;
+
+    const result = await Swal.fire({
       title: "¿Seguro quieres borrar este turno?",
       text: "¡No podrás revertir esta acción!",
       icon: "warning",
@@ -47,13 +65,18 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
       cancelButtonColor: "#3085d6",
       confirmButtonText: "Sí, borrar",
       cancelButtonText: "Cancelar",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        const turnosGuardados =
-          JSON.parse(localStorage.getItem("turnos")) || [];
-        turnosGuardados.splice(indice, 1);
-        localStorage.setItem("turnos", JSON.stringify(turnosGuardados));
-        setTurnos(turnosGuardados);
+    });
+
+    if (result.isConfirmed) {
+      try {
+        const res = await fetch(
+          `http://localhost:3001/api/reservas/${turno._id}`,
+          {
+            method: "DELETE",
+          }
+        );
+
+        if (!res.ok) throw new Error("Error al eliminar");
 
         Swal.fire({
           icon: "success",
@@ -62,17 +85,19 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
           timer: 2000,
           showConfirmButton: false,
         });
+
+        cargarTurnos(); // Recargar la lista
+      } catch (error) {
+        Swal.fire("Error", "No se pudo eliminar el turno", "error");
       }
-    });
+    }
   };
 
+  // Cerrar modal: recargar turnos
   const cerrarModalTurno = () => {
     setShowModalTurno(false);
     setTurnoEditar(null);
-    setIndiceEditar(null);
-    // Recargar turnos desde localStorage
-    const turnosGuardados = JSON.parse(localStorage.getItem("turnos")) || [];
-    setTurnos(turnosGuardados);
+    cargarTurnos();
   };
   const [productosAPI, setProductosAPI] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -341,10 +366,16 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
 
       {/* TURNOS */}
       <div className="container py-4">
+        <div className="d-flex justify-content-between align-items-center mb-4">
+          <h2 className="text-center flex-grow-1">Administrador de Turnos</h2>
+          <Button variant="success" onClick={() => setShowModalTurno(true)}>
+            + Crear Turno
+          </Button>
+        </div>
         <TablaTurno
           turnos={turnos}
           onVer={verTurno}
-          onEditar={editarTurno}
+          onEditar={(turno) => editarTurno(turno)}
           onBorrar={borrarTurno}
         />
       </div>
