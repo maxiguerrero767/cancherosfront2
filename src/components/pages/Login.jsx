@@ -1,30 +1,50 @@
 import { Modal, Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
-
+import { loginAPI } from "../../helpers/queries";
+import { useNavigate } from "react-router-dom"; 
 
 const Login = ({ show, handleClose, abrirRegistro, setUsuarioLogueado }) => {
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
+ const navigate = useNavigate();
 
-  const onSubmit = (data) => {
-    const adminEmail = import.meta.env.VITE_API_EMAIL;
-    const adminPassword = import.meta.env.VITE_API_PASSWORD;
+  const onSubmit = async (data) => {
+    const respuesta = await loginAPI(data);
+    
+    if (respuesta && respuesta.status === 200) {
+      const datos = await respuesta.json();
+      
+      const usuarioData = {
+        nombre: datos.nombre,
+        email: datos.email,
+        rol: datos.rol,
+        token: datos.token,
+        isAdmin: datos.rol === 'admin' 
+      };
 
-    if (data.email === adminEmail && data.password === adminPassword) {
-      setUsuarioLogueado({ isAdmin: true });
-      reset();
-      handleClose();
+      setUsuarioLogueado(usuarioData);
+      
+      
       Swal.fire({
         icon: "success",
-        title: "Bienvenido administrador",
+        title: `Bienvenido ${datos.nombre}`,
         text: "Has iniciado sesión correctamente",
+        timer: 1500,
+        showConfirmButton: false
       });
+      
+      reset();
+      handleClose();
+       if (datos.rol === 'admin') {
+        navigate("/administrador"); 
+      } else {
+        navigate("/");
+      }
     } else {
-      setUsuarioLogueado({ isAdmin: false });
       Swal.fire({
         icon: "error",
-        title: "Credenciales incorrectas",
-        text: "El email o la contraseña son inválidos",
+        title: "Error",
+        text: "El email o la contraseña son incorrectos",
       });
     }
   };
@@ -60,10 +80,7 @@ const Login = ({ show, handleClose, abrirRegistro, setUsuarioLogueado }) => {
               placeholder="********"
               {...register("password", {
                 required: "La contraseña es obligatoria",
-                pattern: {
-                  value: /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-={}[\]|:;"'<>,.?/]).{8,}$/,
-                  message: "Mínimo 8 caracteres, una mayúscula, un número y un símbolo especial",
-                },
+                minLength: { value: 6, message: "Mínimo 6 caracteres" }
               })}
             />
             {errors.password && <Form.Text className="text-danger">{errors.password.message}</Form.Text>}

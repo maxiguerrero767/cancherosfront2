@@ -4,6 +4,7 @@ import { Table, Button, Modal, Form } from "react-bootstrap";
 import TablaTurno from "../pages/turno/TablaTurno";
 import ModalTurno from "../pages/turno/ModalTurno";
 import ModalVerTurno from "../pages/turno/ModalVerTurno";
+import TablaUsuarios from "../admin/users/TablaUsuarios";
 import {
   obtenerProducto,
   crearProducto,
@@ -108,6 +109,7 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
     talles: "",
     categoria: "ellas",
   });
+   const [errors, setErrors] = useState({});
   const [editandoId, setEditandoId] = useState(null);
   const cargarProductos = async () => {
     try {
@@ -163,7 +165,49 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
     setShowModal(true);
   };
 
+  const validarFormulario = () => {
+    const nuevosErrores = {};
+
+    // Validar Nombre
+    if (!nuevoProducto.nombre.trim()) {
+      nuevosErrores.nombre = "El nombre es obligatorio.";
+    } else if (nuevoProducto.nombre.length < 3) {
+      nuevosErrores.nombre = "El nombre debe tener al menos 3 caracteres.";
+    }
+
+    // Validar Precio
+    if (!nuevoProducto.precio) {
+      nuevosErrores.precio = "El precio es obligatorio.";
+    } else if (
+     
+      (nuevoProducto.precio) < 0
+    ) {
+      nuevosErrores.precio = "El precio debe ser un número positivo.";
+    }
+
+    // Validar Descripción
+    if (!nuevoProducto.descripcion.trim()) {
+      nuevosErrores.descripcion = "La descripción es obligatoria.";
+    }
+
+    // Validar Talles
+    if (!nuevoProducto.talles.trim()) {
+      nuevosErrores.talles = "Debes ingresar al menos un talle.";
+    }
+
+    // Validar Categoría
+    if (!nuevoProducto.categoria) {
+      nuevosErrores.categoria = "Selecciona una categoría.";
+    }
+
+    setErrors(nuevosErrores);
+    return Object.keys(nuevosErrores).length === 0;
+  };
+
   const guardarProducto = async () => {
+    if (!validarFormulario()) {
+      return;
+    }
     try {
       const formData = new FormData();
       formData.append("nombre", nuevoProducto.nombre);
@@ -335,7 +379,10 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
           onBorrar={borrarTurno}
         />
       </div>
-
+      
+      <div className="mb-5">
+        <TablaUsuarios />
+      </div>
       {/* Modal Editar Turno */}
       <ModalTurno
         show={showModalTurno}
@@ -368,7 +415,11 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
                 onChange={(e) =>
                   setNuevoProducto({ ...nuevoProducto, nombre: e.target.value })
                 }
+                isInvalid={!!errors.nombre}
               />
+              <Form.Control.Feedback type="invalid">
+                {errors.nombre}
+              </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group className="mb-2">
@@ -379,14 +430,17 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
                 onChange={(e) => {
                   let valor = e.target.value;
 
-                  // Si el usuario borra todo, dejamos $
                   if (!valor.includes("$")) {
                     valor = "$" + valor.replace(/\$/g, "");
                   }
 
                   setNuevoProducto({ ...nuevoProducto, precio: valor });
                 }}
+                isInvalid={!!errors.precio}
               />
+              <Form.Control.Feedback type="invalid">
+                {errors.precio}
+              </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group className="mb-2">
@@ -400,7 +454,11 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
                     descripcion: e.target.value,
                   })
                 }
+                isInvalid={!!errors.descripcion}
               />
+              <Form.Control.Feedback type="invalid">
+                {errors.descripcion}
+              </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group className="mb-2">
@@ -410,6 +468,7 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
                 onChange={(e) =>
                   setNuevoProducto({ ...nuevoProducto, talles: e.target.value })
                 }
+                 isInvalid={!!errors.talles}
               >
                 <option value="--">--</option>
                 <option value="XS">XS</option>
@@ -418,6 +477,7 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
                 <option value="L">L</option>
                 <option value="XL">XL</option>
               </Form.Select>
+               <Form.Control.Feedback type="invalid">{errors.talles}</Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group className="mb-2">
@@ -463,12 +523,14 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
                     categoria: e.target.value,
                   })
                 }
+                 isInvalid={!!errors.categoria}
               >
                 <option value="ellas">Ellas</option>
                 <option value="hombre">Hombre</option>
                 <option value="niños">Niños</option>
                 <option value="accesorios">Accesorios</option>
               </Form.Select>
+               <Form.Control.Feedback type="invalid">{errors.categoria}</Form.Control.Feedback>
             </Form.Group>
 
             <Button
