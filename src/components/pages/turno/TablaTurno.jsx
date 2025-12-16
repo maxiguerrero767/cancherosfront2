@@ -6,8 +6,8 @@ const TablaTurno = ({ turnos, onEditar, onBorrar, onVer }) => {
 
   return (
     <div className="container mt-4">
-      <h2 className="mb-3 text-center">Administrador de Turnos</h2>
-      <Table striped bordered hover responsive className="align-middle text-center shadow-sm">
+{/*       <h2 className="mb-3 text-center">Administrador de Turnos</h2>
+ */}      <Table striped bordered hover responsive className="align-middle text-center shadow-sm">
         <thead className="table-dark">
           <tr>
             <th>Nombre</th>

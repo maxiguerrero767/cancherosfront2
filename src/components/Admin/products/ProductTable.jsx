@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+/* import React, { useState, useEffect } from "react";
 import { Table, Button } from "react-bootstrap";
 import Swal from "sweetalert2";
 import { getProducts, createProduct, updateProduct, deleteProduct } from "./services/product.service";
@@ -124,4 +124,4 @@ const ProductTable = () => {
   );
 };
 
-export default ProductTable;
+export default ProductTable; */

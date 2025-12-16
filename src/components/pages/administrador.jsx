@@ -584,7 +584,6 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
                 <p className="mb-2">
                   <strong>Categoría:</strong> {productoVer.categoria}
                 </p>
-                <button className="botonComprar rounded">Comprar</button>
               </div>
             </div>
           )}

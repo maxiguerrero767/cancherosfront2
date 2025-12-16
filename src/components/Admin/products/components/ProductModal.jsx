@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+/* import React, { useEffect } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 const SERVER_URL = import.meta.env.VITE_API_URL 
@@ -129,4 +129,4 @@ const ProductModal = ({ show, handleClose, productToEdit, handleSave }) => {
 };
 
 
-export default ProductModal;
+export default ProductModal; */
