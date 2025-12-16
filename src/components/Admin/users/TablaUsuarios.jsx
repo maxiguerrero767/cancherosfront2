@@ -18,7 +18,7 @@ const TablaUsuarios = () => {
 
   const { register, handleSubmit, reset, setValue, formState: { errors } } = useForm();
 
- const cargarUsuarios = async () => {
+  const cargarUsuarios = async () => {
     try {
       const respuesta = await obtenerUsuarios();
       
@@ -48,7 +48,7 @@ const TablaUsuarios = () => {
     setValue("nombre", usuario.nombre);
     setValue("email", usuario.email);
     setValue("rol", usuario.rol);
-    setValue("password", "");
+    setValue("password", ""); 
     setShowModal(true);
   };
 
@@ -56,6 +56,10 @@ const TablaUsuarios = () => {
     try {
       if (usuarioEditar && !data.password) {
         delete data.password;
+      }
+
+      if (usuarioEditar && usuarioEditar.email === usuarioLogueado.email) {
+        data.rol = usuarioLogueado.rol; 
       }
 
       let respuesta;
@@ -75,7 +79,12 @@ const TablaUsuarios = () => {
         cargarUsuarios();
         setShowModal(false);
       } else {
-        Swal.fire({ icon: "error", title: "Error", text: "No se pudo guardar" });
+        const errorData = await respuesta.json();
+        Swal.fire({ 
+            icon: "error", 
+            title: "Error", 
+            text: errorData.mensaje || "No se pudo guardar. Verifica los datos." 
+        });
       }
     } catch (error) {
       console.log(error);
@@ -92,9 +101,13 @@ const TablaUsuarios = () => {
       confirmButtonText: "Borrar",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        await borrarUsuarioAPI(id);
-        cargarUsuarios();
-        Swal.fire("Eliminado", "El usuario ha sido eliminado.", "success");
+        const respuesta = await borrarUsuarioAPI(id);
+        if(respuesta.status === 200){
+            cargarUsuarios();
+            Swal.fire("Eliminado", "El usuario ha sido eliminado.", "success");
+        } else {
+            Swal.fire("Error", "No se pudo eliminar el usuario", "error");
+        }
       }
     });
   };
@@ -131,7 +144,6 @@ const TablaUsuarios = () => {
                 <Button variant="warning" size="sm" className="me-2" onClick={() => handleEditar(user)}>
                   Editar
                 </Button>
-                
                 <Button 
                   variant="danger" 
                   size="sm" 
@@ -141,7 +153,6 @@ const TablaUsuarios = () => {
                 >
                   Borrar
                 </Button>
-                
               </td>
             </tr>
           ))}
@@ -154,27 +165,74 @@ const TablaUsuarios = () => {
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleSubmit(onSubmit)}>
+            
             <Form.Group className="mb-3">
               <Form.Label>Nombre</Form.Label>
-              <Form.Control type="text" {...register("nombre", { required: true, minLength: 3 })} />
+              <Form.Control 
+                type="text" 
+                {...register("nombre", { 
+                    required: "El nombre es obligatorio", 
+                    minLength: { value: 3, message: "Mínimo 3 caracteres" } 
+                })} 
+                isInvalid={!!errors.nombre} 
+              />
+              <Form.Control.Feedback type="invalid">
+                {errors.nombre?.message}
+              </Form.Control.Feedback>
             </Form.Group>
+
             <Form.Group className="mb-3">
               <Form.Label>Email</Form.Label>
-              <Form.Control type="email" {...register("email", { required: true })} />
+              <Form.Control 
+                type="email" 
+                {...register("email", { 
+                    required: "El email es obligatorio",
+                    pattern: {
+                        value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/,
+                        message: "Ingresa un correo válido (ej: nombre@mail.com)"
+                    }
+                })} 
+                isInvalid={!!errors.email}
+              />
+              <Form.Control.Feedback type="invalid">
+                {errors.email?.message}
+              </Form.Control.Feedback>
             </Form.Group>
+
             <Form.Group className="mb-3">
               <Form.Label>Contraseña</Form.Label>
-              <Form.Control type="password" placeholder="Opcional al editar" {...register("password")} />
+              <Form.Control 
+                type="password" 
+                placeholder={usuarioEditar ? "Dejar vacío para no cambiar" : "Contraseña nueva"}
+                {...register("password", { 
+                    required: !usuarioEditar ? "La contraseña es obligatoria" : false,
+                    minLength: { value: 8, message: "Mínimo 8 caracteres" },
+                    pattern: {
+                        value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]/,
+                        message: "Debe tener mayúscula, minúscula, número y carácter especial ($@!%*?&)"
+                    }
+                })} 
+                isInvalid={!!errors.password}
+              />
+              <Form.Control.Feedback type="invalid">
+                {errors.password?.message}
+              </Form.Control.Feedback>
             </Form.Group>
+
             <Form.Group className="mb-3">
               <Form.Label>Rol</Form.Label>
-              <Form.Select {...register("rol", { required: true })}
-               disabled={usuarioEditar && usuarioEditar.email === usuarioLogueado.email}>
+              <Form.Select 
+                {...register("rol", { required: true })}
+                disabled={usuarioEditar && usuarioEditar.email === usuarioLogueado.email}
+              >
                 <option value="usuario">Usuario</option>
                 <option value="admin">Administrador</option>
               </Form.Select>
             </Form.Group>
-            <Button variant="primary" type="submit" className="w-100">Guardar</Button>
+
+            <Button variant="primary" type="submit" className="w-100">
+              Guardar
+            </Button>
           </Form>
         </Modal.Body>
       </Modal>

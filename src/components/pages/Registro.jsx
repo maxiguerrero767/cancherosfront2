@@ -4,14 +4,15 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { registroAPI } from "../../helpers/queries";
 
-const Registro = ({ show, handleClose, setUsuarioLogueado }) => {
+const Registro = ({ show, handleClose, abrirLogin, setUsuarioLogueado }) => {
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     const usuarioNuevo = {
       nombre: data.nombre,
       email: data.email,
+      telefono: data.telefono,
       password: data.password
     };
 
@@ -37,7 +38,7 @@ const Registro = ({ show, handleClose, setUsuarioLogueado }) => {
       Swal.fire({
         icon: "success",
         title: `¡Bienvenido ${datosUsuario.nombre}!`,
-        text: "Registro exitoso. Ya estás logueado.",
+        text: "Registro exitoso.",
         timer: 2000,
         showConfirmButton: false
       });
@@ -55,39 +56,101 @@ const Registro = ({ show, handleClose, setUsuarioLogueado }) => {
     }
   };
 
+  const irALogin = () => {
+    handleClose();
+    abrirLogin();
+  };
+
   return (
-    <Modal show={show} onHide={handleClose} centered size="lg" contentClassName="border border-white border-3">
-      <Modal.Header closeButton>
-        <Modal.Title>Registro de usuario</Modal.Title>
+    <Modal 
+      show={show} 
+      onHide={handleClose} 
+      centered 
+      size="lg" 
+      contentClassName="border border-white border-3" 
+    >
+      <Modal.Header closeButton className="border-0 pb-0">
+        <Modal.Title className="fw-bold">Registro de usuario</Modal.Title>
       </Modal.Header>
 
-      <Modal.Body>
-        <div className="row">
+      <Modal.Body className="p-4"> 
+        
+        <div className="row g-4 h-100"> 
+          
           <div className="col-md-6">
             <Form onSubmit={handleSubmit(onSubmit)}>
+              
               <Form.Group className="mb-3">
                 <Form.Label>Nombre completo *</Form.Label>
-                <Form.Control type="text" placeholder="Juan Pérez" {...register("nombre", { required: "Obligatorio", minLength: { value: 3, message: "Mínimo 3 letras" } })} />
-                {errors.nombre && <Form.Text className="text-danger">{errors.nombre.message}</Form.Text>}
+                <Form.Control 
+                  type="text" 
+                  placeholder="Nombre completo" 
+                  {...register("nombre", { required: "Campo obligatorio", minLength: { value: 3, message: "Mínimo 3 letras" } })} 
+                />
+                {errors.nombre && <Form.Text className="text-danger small">{errors.nombre.message}</Form.Text>}
               </Form.Group>
 
               <Form.Group className="mb-3">
                 <Form.Label>Email *</Form.Label>
-                <Form.Control type="email" placeholder="correo@email.com" {...register("email", { required: "Obligatorio", pattern: { value: /^\S+@\S+\.\S+$/, message: "Email inválido" } })} />
-                {errors.email && <Form.Text className="text-danger">{errors.email.message}</Form.Text>}
+                <Form.Control 
+                  type="email" 
+                  placeholder="correo@email.com" 
+                  {...register("email", { required: "Campo obligatorio", pattern: { value: /^\S+@\S+\.\S+$/, message: "Email inválido" } })} 
+                />
+                {errors.email && <Form.Text className="text-danger small">{errors.email.message}</Form.Text>}
+              </Form.Group>
+
+              <Form.Group className="mb-3">
+                <Form.Label>Teléfono *</Form.Label>
+                <Form.Control 
+                  type="number" 
+                  placeholder="sin codigo de area" 
+                  {...register("telefono", { required: "Campo obligatorio", minLength: { value: 8, message: "Mínimo 8 números" } })} 
+                />
+                {errors.telefono && <Form.Text className="text-danger small">{errors.telefono.message}</Form.Text>}
               </Form.Group>
 
               <Form.Group className="mb-3">
                 <Form.Label>Contraseña *</Form.Label>
-                <Form.Control type="password" placeholder="********" {...register("password", { required: "Obligatoria", minLength: { value: 6, message: "Mínimo 6 caracteres" } })} />
-                {errors.password && <Form.Text className="text-danger">{errors.password.message}</Form.Text>}
+                <Form.Control 
+                  type="password" 
+                  placeholder="********" 
+                  {...register("password", { 
+                    required: "Obligatoria", 
+                    minLength: { value: 8, message: "Mínimo 8 caracteres" },
+                    pattern: {
+                        value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]/,
+                        message: "Debe tener mayúscula, minúscula, número y símbolo"
+                    }
+                  })} 
+                />
+                {errors.password && <Form.Text className="text-danger small">{errors.password.message}</Form.Text>}
               </Form.Group>
 
-              <Button variant="primary" type="submit" className="w-100 mt-2">Registrarme e Ingresar</Button>
+              <Button variant="info" type="submit" className="w-100 mt-2 fw-bold text-white" style={{backgroundColor: '#0dcaf0'}}>
+                Registrarme
+              </Button>
+
+              <div className="text-center mt-3">
+                <small>¿Ya tenés cuenta? </small>
+                <button
+                  type="button"
+                  className="btn btn-link p-0 text-decoration-none"
+                  onClick={irALogin}
+                >
+                  Iniciá sesión
+                </button>
+              </div>
             </Form>
           </div>
+
           <div className="col-md-6 d-none d-md-block">
-            <img src="https://images.pexels.com/photos/47730/the-ball-stadion-football-the-pitch-47730.jpeg" alt="futbol" className="img-fluid rounded h-100 w-100 object-fit-cover" />
+            <img 
+              src="https://images.pexels.com/photos/47730/the-ball-stadion-football-the-pitch-47730.jpeg" 
+              alt="futbol" 
+              className="img-fluid rounded h-100 w-100" 
+              style={{ objectFit: "cover" }} 
+            />
           </div>
         </div>
       </Modal.Body>
