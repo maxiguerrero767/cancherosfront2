@@ -1,5 +1,16 @@
-const BASE_URL = import.meta.env.VITE_API_URL;
-const API_URL = `${BASE_URL}/productos`;
+const URL_PRODUCTOS = import.meta.env.VITE_API_URL 
+  ? `${import.meta.env.VITE_API_URL}/products` 
+  : "http://localhost:3001/api/products";
+
+const URL_USUARIOS = import.meta.env.VITE_API_URL 
+  ? `${import.meta.env.VITE_API_URL}/usuarios` 
+  : "http://localhost:3001/api/usuarios";
+
+
+const getToken = () => {
+  const usuario = JSON.parse(sessionStorage.getItem('usuarioKey'));
+  return usuario ? usuario.token : null;
+};
 
 export const obtenerProducto = async () => {
   const res = await fetch(API_URL);
@@ -8,42 +19,53 @@ export const obtenerProducto = async () => {
 };
 
 export const crearProducto = async (formData) => {
-  const res = await fetch(API_URL, {
-    method: "POST",
-    body: formData, 
-  });
-
-  if (!res.ok) throw new Error("Error al crear producto");
-  return res.json();
+  const token = getToken();
+  try {
+    const res = await fetch(URL_PRODUCTOS, {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${token}` 
+      },
+      body: formData, 
+    });
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
 };
-
-export const editarProducto = async (id, formData) => {
-  const res = await fetch(`${API_URL}/${id}`, {
-    method: "PUT",
-    body: formData,
-  });
-
-  if (!res.ok) throw new Error("Error al editar producto");
-  return res.json();
+export const editarProductoService = async (id, formData) => {
+  const token = getToken();
+  try {
+    const res = await fetch(`${URL_PRODUCTOS}/${id}`, {
+      method: "PUT",
+      headers: {
+        "Authorization": `Bearer ${token}`
+      },
+      body: formData,
+    });
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
 };
-
 export const borrarProductoService = async (id) => {
-  const res = await fetch(`${API_URL}/${id}`, {
-    method: "DELETE",
-  });
-
-  if (!res.ok) throw new Error("Error al borrar producto");
-  return res.json();
+  const token = getToken();
+  try {
+    const res = await fetch(`${URL_PRODUCTOS}/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Authorization": `Bearer ${token}`
+      },
+    });
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
 };
-
-
-const URL_USUARIO = import.meta.env.VITE_API_URL 
-  ? `${import.meta.env.VITE_API_URL}/usuarios` 
-  : "http://localhost:3001/api/usuarios";
 
 export const loginAPI = async (usuario) => {
   try {
-    const respuesta = await fetch(`${URL_USUARIO}/login`, {
+    const respuesta = await fetch(`${URL_USUARIOS}/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -58,7 +80,7 @@ export const loginAPI = async (usuario) => {
 
 export const registroAPI = async (usuario) => {
   try {
-    const respuesta = await fetch(`${URL_USUARIO}/registro`, {
+    const respuesta = await fetch(`${URL_USUARIOS}/registro`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -72,18 +94,12 @@ export const registroAPI = async (usuario) => {
 };
 
 export const obtenerUsuarios = async () => {
+  const token = getToken();
   try {
-    const respuesta = await fetch(URL_USUARIO);
-    return respuesta;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-export const borrarUsuarioAPI = async (id) => {
-  try {
-    const respuesta = await fetch(`${URL_USUARIO}/${id}`, {
-      method: "DELETE",
+    const respuesta = await fetch(URL_USUARIOS, {
+      headers: {
+        "Authorization": `Bearer ${token}` 
+      }
     });
     return respuesta;
   } catch (error) {
@@ -91,11 +107,29 @@ export const borrarUsuarioAPI = async (id) => {
   }
 };
 
-export const editarUsuarioAPI = async (id, datos) => {
+export const borrarUsuarioAPI = async (id) => {
+  const token = getToken();
   try {
-    const respuesta = await fetch(`${URL_USUARIO}/${id}`, {
+    const respuesta = await fetch(`${URL_USUARIOS}/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
+    });
+    return respuesta;
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const editarUsuarioAPI = async (id, datos) => {
+  const token = getToken();
+  try {
+    const respuesta = await fetch(`${URL_USUARIOS}/${id}`, {
       method: "PUT",
-      headers: { "Content-Type": "application/json" },
+      headers: { 
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}` 
+      },
       body: JSON.stringify(datos),
     });
     return respuesta;
@@ -105,10 +139,14 @@ export const editarUsuarioAPI = async (id, datos) => {
 };
 
 export const crearUsuarioAdmin = async (datos) => {
+  const token = getToken();
   try {
-    const respuesta = await fetch(`${URL_USUARIO}/registro`, {
+    const respuesta = await fetch(`${URL_USUARIOS}/registro`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { 
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}` 
+      },
       body: JSON.stringify(datos),
     });
     return respuesta;
