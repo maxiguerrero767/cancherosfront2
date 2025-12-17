@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import Swal from "sweetalert2";
-import "../../../styles/ModalTurno.css";
+import "../../../styles/modalTurno.css";
 
 const ModalTurno = ({ show, handleClose, turnoEditar, indiceEditar }) => {
   const hoy = new Date().toISOString().split("T")[0];
