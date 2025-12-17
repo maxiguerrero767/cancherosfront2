@@ -260,7 +260,7 @@ const Inicio = ({ usuarioLogueado, setUsuarioLogueado }) => {
             <Col xs={10} sm={8} md={6} xl={3}>
               <Card className="card-catalogo card-imagen-contenedor d-flex flex-column h-md-100">
                 <Card.Img
-                  src="./img/mujer.jpg"
+                  src="./img/mujer.avif"
                   className="img-posicion"
                   alt="mujer con ropa deportiva"
                 />
