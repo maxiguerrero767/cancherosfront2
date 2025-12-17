@@ -113,20 +113,16 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
   const [editandoId, setEditandoId] = useState(null);
 const cargarProductos = async () => {
     try {
-      const respuesta = await obtenerProducto(); 
+      const data = await obtenerProducto(); 
       
-      console.log("--> RESPUESTA DEL BACKEND:", respuesta); 
-
-      if (respuesta && respuesta.status === 200) {
-        const data = await respuesta.json();
-        console.log("--> DATOS JSON:", data); 
+      if (Array.isArray(data)) {
         setProductosAPI(data);
       }
+      
     } catch (error) {
-      console.error("Error al cargar:", error);
+      console.error("Error al cargar productos:", error);
     }
   };
-
   useEffect(() => {
     cargarProductos();
   }, []);
