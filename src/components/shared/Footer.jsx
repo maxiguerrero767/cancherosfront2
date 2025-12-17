@@ -31,7 +31,7 @@ const Footer = () => {
               <h6 className="titulos-redes fw-bold mb-1">Nosotros</h6>
               <div className="d-flex justify-content-center gap-3 social-icons">
                 <Link to="nosotros">
-                  <i class="bi bi-person-hearts"></i>
+                  <i className="bi bi-person-hearts"></i>
                 </Link>
               </div>
             </div>

@@ -14,6 +14,7 @@ import Registro from "./components/pages/Registro";
 import Contacto from "./components/pages/Contacto";
 import Nosotros from "./components/pages/Nosotros";
 import FormularioTurno from "./components/pages/turno/FormularioTurno";
+import '.dotenv/config';
 import "./styles/inicio.css";
 
 function App() {
