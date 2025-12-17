@@ -104,7 +104,7 @@ const TablaUsuarios = () => {
       text: "No se puede revertir",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#d33",
+      confirmButtonColor: "#e60e42",
       confirmButtonText: "Borrar",
     }).then(async (result) => {
       if (result.isConfirmed) {
@@ -123,8 +123,8 @@ const TablaUsuarios = () => {
     <div className="p-3 border border-secondary rounded">
       <div className="d-flex justify-content-between align-items-center mb-3">
         <h4 className="text-white m-0">Gestión de Usuarios</h4>
-        <Button variant="success" onClick={handleCrear}>
-          + Nuevo Usuario
+        <Button className="btn-verde" onClick={handleCrear}>
+          + Crear Usuario
         </Button>
       </div>
 

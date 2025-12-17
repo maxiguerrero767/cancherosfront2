@@ -22,9 +22,15 @@ const Footer = () => {
                 <Link to="contacto">
                   <i className="bi bi-envelope"></i>
                 </Link>
+                <a
+                  href="https://share.google/XuZGa6cdDVmXFOPua"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i class="bi bi-geo-alt"></i>
+                </a>
               </div>
             </div>
-
 
             {/* Columna Nosotros */}
             <div className="col-md-3 mb-3 text-center">
@@ -35,8 +41,6 @@ const Footer = () => {
                 </Link>
               </div>
             </div>
-
-
 
             {/* Columna Redes */}
             <div className="col-md-3 mb-3 text-center">
