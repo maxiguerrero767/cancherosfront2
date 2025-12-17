@@ -47,7 +47,7 @@ Todo dentro de una experiencia unificada.
 
 ![GitHub](https://img.shields.io/badge/GitHub-Repo-00BFA6?logo=github&logoColor=white&style=for-the-badge) → [Repositorio en GitHub](https://github.com/TaliCabana/cancherosfront.git)  
 
-![Netlify](https://img.shields.io/badge/Netlify-Sitio-00BFA6?logo=netlify&logoColor=white&style=for-the-badge) → [Sitio desplegado](https://cancherosfront.netlify.app/)  
+![Netlify](https://img.shields.io/badge/Netlify-Sitio-00BFA6?logo=netlify&logoColor=white&style=for-the-badge) → [Sitio desplegado](https://cancherosfront.netlify.app/)
 
 ---
 
