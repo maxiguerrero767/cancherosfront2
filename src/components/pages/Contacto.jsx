@@ -29,7 +29,6 @@ const Contacto = () => {
       icon: "success",
       title: "¡Consulta enviada!",
       text: "Tu mensaje ha sido recibido con éxito. Te responderemos a la brevedad.",
-      icon: "success",
       customClass: {
         popup: "swal-popup-custom",
         confirmButton: "btn-swal-confirm",

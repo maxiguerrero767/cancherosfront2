@@ -8,7 +8,7 @@ import TablaUsuarios from "../admin/users/TablaUsuarios";
 import {
   obtenerProducto,
   crearProducto,
-  editarProducto as editarProductoService,
+  editarProductoService,
   borrarProductoService,
 } from "../../helpers/queries";
 const Administrador = ({ productosCreados, setProductosCreados }) => {
