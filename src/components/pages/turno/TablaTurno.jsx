@@ -5,9 +5,8 @@ const TablaTurno = ({ turnos, onEditar, onBorrar, onVer }) => {
 
 
   return (
-    <div className="container mt-4">
-{/*       <h2 className="mb-3 text-center">Administrador de Turnos</h2>
- */}      <Table striped bordered hover responsive className="align-middle text-center shadow-sm">
+    <div className="p-0">
+         <Table striped bordered hover responsive className="align-middle text-center shadow-sm">
         <thead className="table-dark">
           <tr>
             <th>Nombre</th>
@@ -34,13 +33,13 @@ const TablaTurno = ({ turnos, onEditar, onBorrar, onVer }) => {
                 <td>{t.cancha}</td>
                 <td>{t.estado}</td>
                 <td>
-                  <Button variant="info" size="sm" className="me-2" onClick={() => onVer(t, index)}>
+                  <Button variant="info" size="sm" className="m-1" onClick={() => onVer(t, index)}>
                     Ver
                   </Button>
-                  <Button variant="warning" size="sm" className="me-2" onClick={() => onEditar(t, index)}>
+                  <Button variant="warning" size="sm" className="m-1" onClick={() => onEditar(t, index)}>
                     Editar
                   </Button>
-                  <Button variant="danger" size="sm" onClick={() => onBorrar(index)}>
+                  <Button variant="danger" size="sm" className="m-1"onClick={() => onBorrar(index)}>
                     Borrar
                   </Button>
                 </td>
@@ -49,7 +48,7 @@ const TablaTurno = ({ turnos, onEditar, onBorrar, onVer }) => {
           )}
         </tbody>
       </Table>
-    </div>
+</div>
   );
 };
 

@@ -126,16 +126,18 @@ const Registro = ({ show, handleClose, abrirLogin, setUsuarioLogueado }) => {
                 />
                 {errors.password && <Form.Text className="text-danger small">{errors.password.message}</Form.Text>}
               </Form.Group>
-
-              <Button variant="info" type="submit" className="w-100 mt-2 fw-bold text-white" style={{backgroundColor: '#0dcaf0'}}>
+                  <div className="justify-content-center d-flex">
+              <Button type="submit" className="btn-verde w-50 mt-2 text-white">
                 Registrarme
               </Button>
+                  </div>
+
 
               <div className="text-center mt-3">
                 <small>¿Ya tenés cuenta? </small>
                 <button
                   type="button"
-                  className="btn btn-link p-0 text-decoration-none"
+                  className="btn-texto btn btn-link p-0 text-decoration-none"
                   onClick={irALogin}
                 >
                   Iniciá sesión

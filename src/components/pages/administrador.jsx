@@ -289,7 +289,7 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
       <div className="d-flex justify-content-between align-items-center mb-4">
         <h2 className="text-center flex-grow-1">Administrador de Productos</h2>
         <Button className="btn-verde" onClick={abrirCrearProducto}>
-          + Crear
+          + Crear Producto
         </Button>
       </div>
 
@@ -337,7 +337,7 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
                   <Button
                     variant="info"
                     size="sm"
-                    className="me-1"
+                    className="m-1"
                     onClick={() => verProducto(producto)}
                   >
                     Ver
@@ -345,7 +345,7 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
                   <Button
                     variant="warning"
                     size="sm"
-                    className="me-1"
+                    className="m-1"
                     onClick={() => editarProducto(producto)}
                   >
                     Editar
@@ -353,6 +353,7 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
                   <Button
                     variant="danger"
                     size="sm"
+                    className="m-1"
                     onClick={() => borrarProducto(producto._id)}
                   >
                     Borrar
@@ -368,7 +369,7 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
       <div className="container py-4">
         <div className="d-flex justify-content-between align-items-center mb-4">
           <h2 className="text-center flex-grow-1">Administrador de Turnos</h2>
-          <Button variant="success" onClick={() => setShowModalTurno(true)}>
+          <Button className="btn-verde" onClick={() => setShowModalTurno(true)}>
             + Crear Turno
           </Button>
         </div>

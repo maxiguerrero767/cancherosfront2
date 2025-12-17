@@ -194,6 +194,20 @@
   color: var(--azulPetroleo);
 }
 
+.btn-verde:focus{
+  background-color: var(--verdeNeon)!important;
+  border-color: var(--verdeNeon);
+  color: var(--azulPetroleo);
+}
+
+.btn-texto{
+  color:var(--verdeExito);
+}
+
+.btn-texto:hover{
+  color:var(--verdeNeon);
+}
+
 /*MEDIA QUERIES */
 
 /* MÓVIL */
