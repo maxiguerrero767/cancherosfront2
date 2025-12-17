@@ -13,7 +13,7 @@ const getToken = () => {
 };
 
 export const obtenerProducto = async () => {
-  const res = await fetch(API_URL);
+  const res = await fetch(VITE_API_URL);
   if (!res.ok) throw new Error("Error al obtener productos");
   return res.json();
 };
