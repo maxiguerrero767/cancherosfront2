@@ -13,15 +13,12 @@ const getToken = () => {
 
 const authFetch = async (url, options = {}) => {
   const token = getToken();
-
-  // BLINDAJE 1: Si no hay token en el storage, no molestamos al servidor
-  // Devolvemos una respuesta falsa para que el componente no explote
   if (!token) {
     console.warn("No se encontró token, cancelando petición.");
     return { 
         ok: false, 
         status: 0, 
-        json: async () => [] // Devolvemos array vacío para no romper nada
+        json: async () => [] 
     };
   }
 

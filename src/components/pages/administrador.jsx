@@ -68,14 +68,14 @@ const BASE_URL = import.meta.env.VITE_API_URL;
 
     if (result.isConfirmed) {
       try {
-        const res = await fetch(
-          `${BASE_URL}/reservas/${turno._id}`,
-          {
-            method: "DELETE",
-          }
-        );
+      const res = await fetch(`${BASE_URL}/reservas/${turno._id}`, {
+        method: "DELETE",
+        headers: {
+          "Authorization": `Bearer ${token}`
+        }
+      });
 
-        if (!res.ok) throw new Error("Error al eliminar");
+      if (!res.ok) throw new Error("Error al eliminar");
 
         Swal.fire({ title: "Borrado", text: "Turno eliminado", icon: "success", customClass: swalCustomClass, buttonsStyling: false });
 
