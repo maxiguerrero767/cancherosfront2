@@ -13,7 +13,7 @@ import {
   borrarProductoService,
 } from "../../helpers/queries";
 const Administrador = ({ productosCreados, setProductosCreados }) => {
-
+const BASE_URL = import.meta.env.VITE_API_URL;
   const swalCustomClass = {
     popup: 'swal-popup-custom',
     confirmButton: 'btn-swal-confirm',
@@ -33,7 +33,7 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
   // Cargar turnos desde el backend
   const cargarTurnos = async () => {
     try {
-      const res = await fetch("http://localhost:3001/api/reservas");
+      const res = await fetch( `${BASE_URL}/reservas `);
       if (!res.ok) throw new Error("Error al cargar turnos");
       const data = await res.json();
       setTurnos(data);
@@ -69,7 +69,7 @@ const Administrador = ({ productosCreados, setProductosCreados }) => {
     if (result.isConfirmed) {
       try {
         const res = await fetch(
-          `http://localhost:3001/api/reservas/${turno._id}`,
+          `${BASE_URL}/reservas/${turno._id}`,
           {
             method: "DELETE",
           }
