@@ -51,6 +51,7 @@ const Login = ({ show, handleClose, abrirRegistro, setUsuarioLogueado }) => {
         icon: "error",
         title: "Error",
         text: "El email o la contraseña son incorrectos",
+        customClass: swalCustomClass, buttonsStyling: false
       });
     }
   };

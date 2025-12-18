@@ -15,7 +15,7 @@ import {
     cancelButton: 'btn-swal-cancel',
     title: 'swal2-title',
     htmlContainer: 'swal2-html-container'
-  };
+  };  
 const TablaUsuarios = () => {
   const [usuarios, setUsuarios] = useState([]);
   const [showModal, setShowModal] = useState(false);

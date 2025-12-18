@@ -89,7 +89,8 @@ const ModalTurno = ({ show, handleClose, turnoEditar, indiceEditar }) => {
 
       if (turnoEditar) {
         const id = turnoEditar._id;
-        const res = await fetch(`http://localhost:3001/api/reservas/${id}`, {
+        const URL = import.meta.env.VITE_API_URL + "/reservas/" + id;
+        const res = await fetch(URL, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
@@ -120,7 +121,8 @@ const ModalTurno = ({ show, handleClose, turnoEditar, indiceEditar }) => {
           buttonsStyling: false
         });
       } else {
-        const res = await fetch("http://localhost:3001/api/reservas", {
+        const URL = import.meta.env.VITE_API_URL + "/reservas";
+        const res = await fetch(URL, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),

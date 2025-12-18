@@ -18,21 +18,33 @@ const getToken = () => {
 const authFetch = async (url, options = {}) => {
   const token = getToken();
 
+  // BLINDAJE 1: Si no hay token en el storage, no molestamos al servidor
+  // Devolvemos una respuesta falsa para que el componente no explote
+  if (!token) {
+    console.warn("No se encontró token, cancelando petición.");
+    return { 
+        ok: false, 
+        status: 0, 
+        json: async () => [] // Devolvemos array vacío para no romper nada
+    };
+  }
+
   if (!options.headers) {
     options.headers = {};
   }
 
-  if (token) {
-    options.headers["Authorization"] = `Bearer ${token}`;
-  }
+  options.headers["Authorization"] = `Bearer ${token}`;
 
   try {
     const response = await fetch(url, options);
 
     if (response.status === 401) {
-       await Swal.fire({
+      console.warn("Token expirado. Cerrando sesión...");
+      sessionStorage.removeItem('usuarioKey');
+      
+      await Swal.fire({
         title: "Sesión Expirada",
-        text: "Tu credencial ha vencido por seguridad. Por favor, inicia sesión nuevamente.",
+        text: "Tu credencial ha vencido. Por favor, inicia sesión nuevamente.",
         icon: "warning",
         confirmButtonText: "Entendido",
         customClass: {
@@ -41,14 +53,12 @@ const authFetch = async (url, options = {}) => {
             title: 'swal2-title',
             htmlContainer: 'swal2-html-container'
         },
-        buttonsStyling: false
+        buttonsStyling: false,
+        allowOutsideClick: false
       });
-      
-      sessionStorage.removeItem('usuarioKey');
-      
+
       window.location.href = '/'; 
-      
-      return null; 
+      return null;
     }
 
     return response;
